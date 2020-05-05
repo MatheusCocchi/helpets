@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helpets/view/cadastroUser_widget.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -34,7 +35,10 @@ class _LoginWidgetState extends State<LoginWidget> {
             FlatButton(
               child: Text("Entrar"),
               onPressed: () {
-
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) {return CadastroUserWidget();}),
+              );
               },
             )
           ],
