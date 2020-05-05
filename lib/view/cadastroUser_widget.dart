@@ -29,18 +29,48 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
           children: <Widget>[
             TextField(
               controller: _controllerNome,
+              decoration: 
+              InputDecoration(
+              hintText: 'Nome',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(90.0)),
+              )),
             ),
             TextField(
               controller: _controllerEndereco,
+              decoration: 
+              InputDecoration(
+              hintText: 'Endereço',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(90.0)),
+              )),
             ),
             TextField(
               controller: _controllerNumero,
+              decoration: 
+              InputDecoration(
+              hintText: 'Número',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(90.0)),
+              )),
             ),
             TextField(
               controller: _controllerBairro,
+              decoration: 
+              InputDecoration(
+              hintText: 'Bairro',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(90.0)),
+              )),
             ),
             FlatButton(
               child: Text("Cadastre-se"),
+              shape: 
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                side: BorderSide(color: Colors.deepPurple),
+              ),
+              color: Colors.deepPurple,
               onPressed: () {
 
               },
