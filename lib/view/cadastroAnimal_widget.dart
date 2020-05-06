@@ -81,7 +81,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Color(0xFFC71585),
+                          Color(0xFFFF7300),
                           Color(0xFFFF1493)
                         ],
                       ),
@@ -96,7 +96,14 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                           fontWeight: FontWeight.bold  
                         ),
                       ),
-                      onPressed: () {}
+                      onPressed: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                        return CadastroUserWidget();
+                      }),
+                      );
+                      },
                     ),  
                   ),
                 ],
