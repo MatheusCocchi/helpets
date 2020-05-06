@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helpets/view/cadastroAnimal_widget.dart';
 
 class CadastroUserWidget extends StatefulWidget {
   @override
@@ -29,56 +30,54 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
           children: <Widget>[
             TextField(
               controller: _controllerNome,
-              decoration: 
-              InputDecoration(
-              hintText: 'Nome',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(90.0)),
-              )),
+              decoration: InputDecoration(
+                  hintText: 'Nome',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                  )),
             ),
             TextField(
               controller: _controllerEndereco,
-              decoration: 
-              InputDecoration(
-              hintText: 'Endereço',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(90.0)),
-              )),
+              decoration: InputDecoration(
+                  hintText: 'Endereço',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                  )),
             ),
             TextField(
               controller: _controllerNumero,
-              decoration: 
-              InputDecoration(
-              hintText: 'Número',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(90.0)),
-              )),
+              decoration: InputDecoration(
+                  hintText: 'Número',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                  )),
             ),
             TextField(
               controller: _controllerBairro,
-              decoration: 
-              InputDecoration(
-              hintText: 'Bairro',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(90.0)),
-              )),
+              decoration: InputDecoration(
+                  hintText: 'Bairro',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                  )),
             ),
             FlatButton(
               child: Text("Cadastre-se"),
-              shape: 
-              RoundedRectangleBorder(
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(90.0)),
                 side: BorderSide(color: Colors.deepPurple),
               ),
               color: Colors.deepPurple,
-              onPressed: () {
-
-              },
+              onPressed: () {},
             ),
             FlatButton(
               child: Text("Voltar"),
-              onPressed: () {
-
+              onPressed: () { //Coloquei a navegação para cadastrar animal para poder desenvolver a tela
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return CadastroAnimalWidget();
+                  }),
+                );
               },
             )
           ],
