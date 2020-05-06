@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
+import 'package:helpets/view/login_widget.dart';
 
 class CadastroAnimalWidget extends StatefulWidget {
   @override
@@ -50,6 +51,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Nome'),
+                      controller: _controllerNome,    
                     ),
                   ),
                   Container(
@@ -71,6 +73,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Raça'),
+                      controller: _controllerRaca,    
                     ),
                   ),
                   Spacer(),
@@ -100,7 +103,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                        return CadastroUserWidget();
+                        return LoginWidget();
                       }),
                       );
                       },

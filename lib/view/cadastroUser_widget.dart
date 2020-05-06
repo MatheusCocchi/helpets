@@ -52,6 +52,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Nome'),
+                      controller: _controllerNome,    
                     ),
                   ),
                   Container(
@@ -73,6 +74,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Endereço'),
+                      controller: _controllerEndereco,    
                     ),
                   ),
                     Container(
@@ -94,6 +96,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Numero'),
+                      controller: _controllerNumero,    
                     ),
                   ),
                   Container(
@@ -115,6 +118,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Bairro'),
+                      controller: _controllerBairro,    
                     ),
                   ),
                   Spacer(),
