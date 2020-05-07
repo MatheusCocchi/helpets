@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
-import 'package:helpets/view/login_widget.dart';
+import 'package:helpets/widgets/pink_button.dart';
+import 'package:helpets/widgets/text_field_padrao.dart';
 
 class CadastroAnimalWidget extends StatefulWidget {
   @override
@@ -11,15 +13,50 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   TextEditingController _controllerNome;
   TextEditingController _controllerRaca;
 
-  ///método "principal" responsável por construir a tela de login
+  ///método "principal" responsável por construir a tela cadastro de animal
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _body(context),
+      body: _stackGradient(context),
     );
   }
 
-  ///Corpo da tela de login
+  _stackGradient(BuildContext context) {
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.bottomCenter,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[Color(0xfffff500), Color(0xFFFF1471)],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              margin: EdgeInsets.only(right: 16, left: 16),
+              height: MediaQuery.of(context).size.height / 1.2,
+              alignment: Alignment.topCenter,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
+                  boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 5)]),
+              child: _body(context),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///Corpo da tela de cadastro de animal
   _body(BuildContext context) {
     return SafeArea(
       child: Container(
@@ -28,86 +65,35 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height /2,
+              height: MediaQuery.of(context).size.height / 2,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(top: 32),
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    height: 50,
-                    padding:
-                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(color: Colors.black12, blurRadius: 5)
-                        ]),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          // icon: Icon(Icons.email,
-                          //color: Colors.grey
-                          //),
-                          border: InputBorder.none,
-                          hintText: 'Nome'),
-                      controller: _controllerNome,    
-                    ),
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Nome", _controllerNome),
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    height: 50,
-                    margin: EdgeInsets.only(top: 20),
-                    padding:
-                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(color: Colors.black12, blurRadius: 5)
-                        ]),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          // icon: Icon(Icons.vpn_key,
-                          //color: Colors.grey
-                          //),
-                          border: InputBorder.none,
-                          hintText: 'Raça'),
-                      controller: _controllerRaca,    
-                    ),
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Raça", _controllerRaca),
                   ),
                   Spacer(),
-                  
                   Container(
                     width: MediaQuery.of(context).size.width / 1.2,
                     height: 50,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [
-                          Color(0xFFFF7300),
-                          Color(0xFFFF1493)
-                        ],
+                        colors: [Color(0xFFFF7300), Color(0xFFFF1493)],
                       ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50)
-                        ),
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
-                      child: FlatButton(
-                      child: Text('Salvar'.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white, 
-                          fontWeight: FontWeight.bold  
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                        return LoginWidget();
-                      }),
-                      );
+                    child: PinkButton(
+                      "Salvar",
+                      () {
+                        push(context, CadastroUserWidget());
                       },
-                    ),  
+                    ),
                   ),
                 ],
               ),
