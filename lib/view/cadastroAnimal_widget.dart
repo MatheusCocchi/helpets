@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
-import 'package:helpets/view/main_widget.dart';
+import 'package:helpets/view/login_widget.dart';
 
-class LoginWidget extends StatefulWidget {
+class CadastroAnimalWidget extends StatefulWidget {
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _CadastroAnimalWidgetState createState() => _CadastroAnimalWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController _controllerEmail;
-  TextEditingController _controllerSenha;
+class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
+  TextEditingController _controllerNome;
+  TextEditingController _controllerRaca;
 
   ///método "principal" responsável por construir a tela de login
   @override
@@ -51,7 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Nome'),
-                      controller: _controllerEmail,    
+                      controller: _controllerNome,    
                     ),
                   ),
                   Container(
@@ -72,8 +72,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                           //color: Colors.grey
                           //),
                           border: InputBorder.none,
-                          hintText: 'Senha'),
-                      controller: _controllerSenha,    
+                          hintText: 'Raça'),
+                      controller: _controllerRaca,    
                     ),
                   ),
                   Spacer(),
@@ -93,7 +93,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                     ),
                       child: FlatButton(
-                      child: Text('Entrar'.toUpperCase(),
+                      child: Text('Salvar'.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white, 
                           fontWeight: FontWeight.bold  
@@ -103,26 +103,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                         Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                        return MainWidget();
+                        return LoginWidget();
                       }),
                       );
                       },
                     ),  
                   ),
-                    FlatButton(
-                      child: Text("Cadastre-se",
-                        style: TextStyle(
-                          color: Colors.pink,
-                          fontWeight: FontWeight.bold 
-                          ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (BuildContext context) {return CadastroUserWidget();}),
-                      );
-                    },
-                  )
                 ],
               ),
             )

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:helpets/view/cadastroUser_widget.dart';
-import 'package:helpets/view/main_widget.dart';
+import 'package:helpets/view/cadastroAnimal_widget.dart';
 
-class LoginWidget extends StatefulWidget {
+class CadastroUserWidget extends StatefulWidget {
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _CadastroUserWidgetState createState() => _CadastroUserWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController _controllerEmail;
-  TextEditingController _controllerSenha;
+class _CadastroUserWidgetState extends State<CadastroUserWidget> {
+  TextEditingController _controllerNome;
+  TextEditingController _controllerEndereco;
+  TextEditingController _controllerNumero;
+  TextEditingController _controllerBairro;
 
-  ///método "principal" responsável por construir a tela de login
+  ///método "principal" responsável por construir a tela de cadastro de usuário
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +20,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     );
   }
 
-  ///Corpo da tela de login
+  ///Corpo da tela de cadastro de usuário
   _body(BuildContext context) {
     return SafeArea(
       child: Container(
@@ -27,8 +28,8 @@ class _LoginWidgetState extends State<LoginWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height /2,
+                        Container(
+              height: MediaQuery.of(context).size.height /1.5,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(top: 32),
               child: Column(
@@ -51,7 +52,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           //),
                           border: InputBorder.none,
                           hintText: 'Nome'),
-                      controller: _controllerEmail,    
+                      controller: _controllerNome,    
                     ),
                   ),
                   Container(
@@ -72,8 +73,52 @@ class _LoginWidgetState extends State<LoginWidget> {
                           //color: Colors.grey
                           //),
                           border: InputBorder.none,
-                          hintText: 'Senha'),
-                      controller: _controllerSenha,    
+                          hintText: 'Endereço'),
+                      controller: _controllerEndereco,    
+                    ),
+                  ),
+                    Container(
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    height: 50,
+                    margin: EdgeInsets.only(top: 20),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          // icon: Icon(Icons.vpn_key,
+                          //color: Colors.grey
+                          //),
+                          border: InputBorder.none,
+                          hintText: 'Numero'),
+                      controller: _controllerNumero,    
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    height: 50,
+                    margin: EdgeInsets.only(top: 20),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          // icon: Icon(Icons.vpn_key,
+                          //color: Colors.grey
+                          //),
+                          border: InputBorder.none,
+                          hintText: 'Bairro'),
+                      controller: _controllerBairro,    
                     ),
                   ),
                   Spacer(),
@@ -93,7 +138,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                     ),
                       child: FlatButton(
-                      child: Text('Entrar'.toUpperCase(),
+                      child: Text('Salvar'.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white, 
                           fontWeight: FontWeight.bold  
@@ -103,26 +148,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                         Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                        return MainWidget();
+                        return CadastroAnimalWidget();
                       }),
                       );
                       },
                     ),  
                   ),
-                    FlatButton(
-                      child: Text("Cadastre-se",
-                        style: TextStyle(
-                          color: Colors.pink,
-                          fontWeight: FontWeight.bold 
-                          ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (BuildContext context) {return CadastroUserWidget();}),
-                      );
-                    },
-                  )
                 ],
               ),
             )
