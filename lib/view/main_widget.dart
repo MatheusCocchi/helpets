@@ -27,7 +27,7 @@ class _MainWidgetState extends State<MainWidget> {
               height: MediaQuery.of(context).size.height / 3,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFFFF7300), Color(0xFFFF1493)],
+                  colors: [Color(0xfffff500), Color(0xFFFF1493)],
                 ),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
