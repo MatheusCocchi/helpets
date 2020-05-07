@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
+import 'package:helpets/view/main_widget.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -102,7 +103,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         Navigator.push(
                         context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                        return CadastroUserWidget();
+                        return MainWidget();
                       }),
                       );
                       },
