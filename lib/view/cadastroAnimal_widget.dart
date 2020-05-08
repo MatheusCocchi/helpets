@@ -3,6 +3,7 @@ import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
+import 'package:helpets/view/perfil_widget.dart';
 
 class CadastroAnimalWidget extends StatefulWidget {
   @override
@@ -73,7 +74,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
             Container(
               margin: EdgeInsets.only(top: 30),
               child: Text(
-                "Cadastro de Usuário",
+                "Cadastro de Animal",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
@@ -109,7 +110,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                     child: PinkButton(
                       "Salvar",
                       () {
-                        push(context, CadastroUserWidget());
+                        push(context, PerfilWidget());
                       },
                     ),
                   ),
