@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 
 import 'cadastroUser_widget.dart';
@@ -147,7 +148,7 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                 ),
               ),
               onPressed: () {
-                push(context, CadastroUserWidget());
+                push(context, AdocaoWidget());
               },
             ),
           ),
