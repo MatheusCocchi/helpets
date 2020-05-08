@@ -64,6 +64,24 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Image.asset(
+              "assets/images/ic_helpets_prov.png",
+              width: 100,
+              height: 100,
+              fit: BoxFit.contain,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Text(
+                "Cadastro de Usuário",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Color(0xFFFF1471),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             Container(
               height: MediaQuery.of(context).size.height / 2,
               width: MediaQuery.of(context).size.width,
