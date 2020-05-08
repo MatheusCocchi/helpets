@@ -36,16 +36,16 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
             ),
           ),
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.bottomCenter,
             child: Container(
               margin: EdgeInsets.only(right: 16, left: 16),
-              height: MediaQuery.of(context).size.height / 1.2,
+              height: MediaQuery.of(context).size.height / 1.1,
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                   boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 5)]),
               child: _body(context),
