@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
-import 'package:helpets/view/cadastroUser_widget.dart';
-import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 
@@ -17,7 +15,7 @@ class _RecuperarSenhaWidgetState extends State<RecuperarSenhaWidget> {
   TextEditingController _controllerSenha;
   TextEditingController _controllerConfirmarSenha;
 
-  ///método "principal" responsável por construir a tela de login
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +58,7 @@ class _RecuperarSenhaWidgetState extends State<RecuperarSenhaWidget> {
     );
   }
 
-  ///Corpo da tela de login
+
   _body(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
