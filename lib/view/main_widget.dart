@@ -38,6 +38,29 @@ class _MainWidgetState extends State<MainWidget> {
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50))),
             ),
+            ClipRRect(
+            child: Container(
+              margin: EdgeInsets.only(top: 10),
+              height: 130,
+              width: 350,
+              decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(90),
+              ),
+              ),
+              child: FlatButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/dog_triste.png',
+                  width: 350,
+                  height: 130,
+                  fit: BoxFit.fitWidth,
+                ),
+             
+              ),
+            ),
+            borderRadius: BorderRadius.circular(90),
+            ),
             Container(
               width: MediaQuery.of(context).size.width / 1.2,
               height: 50,
