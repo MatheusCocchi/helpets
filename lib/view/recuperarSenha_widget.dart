@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/view/main_widget.dart';
-import 'package:helpets/view/recuperarSenha_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 
-class LoginWidget extends StatefulWidget {
+import 'login_widget.dart';
+
+class RecuperarSenhaWidget extends StatefulWidget {
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _RecuperarSenhaWidgetState createState() => _RecuperarSenhaWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _RecuperarSenhaWidgetState extends State<RecuperarSenhaWidget> {
   TextEditingController _controllerEmail;
   TextEditingController _controllerSenha;
+  TextEditingController _controllerConfirmarSenha;
 
   ///método "principal" responsável por construir a tela de login
   @override
@@ -75,7 +77,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           Container(
             margin: EdgeInsets.only(top: 30),
             child: Text(
-              "Login",
+              "Recuperar Senha",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
@@ -85,52 +87,26 @@ class _LoginWidgetState extends State<LoginWidget> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 15),
+            margin: EdgeInsets.only(top: 50),
             child: TextFieldPadrao("E-mail", _controllerEmail),
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: TextFieldPadrao("Senha", _controllerSenha),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 5),
-            child: FlatButton(
-              child: Text(
-                "Esqueceu a senha?",
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-              onPressed: () {
-                push(context, RecuperarSenhaWidget());
-              },
-            ),
+            child: TextFieldPadrao("Nova Senha", _controllerSenha),
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
+            child: TextFieldPadrao("Confirmar nova senha", _controllerConfirmarSenha),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 100),
             child: PinkButton(
-              "Entrar",
+              "Confirmar",
               () {
-                push(context, MainWidget());
+                push(context, LoginWidget());
               },
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 5),
-            child: FlatButton(
-              child: Text(
-                "Criar conta",
-                style: TextStyle(
-                  color: Color(0xFFFF1471),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              onPressed: () {
-                push(context, CadastroUserWidget());
-              },
-            ),
-          )
         ],
       ),
     );
