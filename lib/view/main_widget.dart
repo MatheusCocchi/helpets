@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:helpets/utils/nav.dart';
+import 'package:helpets/view/perfil_widget.dart';
+import 'package:helpets/widgets/pink_button.dart';
+
+import 'denuncia_widget.dart';
 
 class MainWidget extends StatefulWidget {
   @override
@@ -26,13 +31,28 @@ class _MainWidgetState extends State<MainWidget> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 3,
               decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xfffff500), Color(0xFFFF1493)],
+                  ),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50))),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.2,
+              height: 50,
+              margin: EdgeInsets.only(top: 15),
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xfffff500), Color(0xFFFF1493)],
+                  colors: [Color(0xFFFF7300), Color(0xFFFF1493)],
                 ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50)
-                )
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+              ),
+              child: PinkButton(
+                "Navegar p/ denuncia",
+                () {
+                  push(context, DenunciaWidget());
+                },
               ),
             ),
           ],
