@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
+import 'package:helpets/widgets/combobox_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:helpets/view/perfil_widget.dart';
@@ -96,6 +97,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     child: TextFieldPadrao("Raça", _controllerRaca),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: DropDown(),
                   ),
                   Spacer(),
                   Container(
