@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/perfil_widget.dart';
+import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/widgets/pink_button.dart';
 
 import 'denuncia_widget.dart';
@@ -18,6 +19,7 @@ class _MainWidgetState extends State<MainWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _body(context),
+      drawer: DrawerDefault(),
     );
   }
 
