@@ -8,6 +8,6 @@ Future push(BuildContext context, Widget page) {
   }));
 }
 
-bool pop(BuildContext context) {
+void pop(BuildContext context) {
   return Navigator.pop(context);
 }
