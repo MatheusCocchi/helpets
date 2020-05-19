@@ -12,14 +12,60 @@ class MainWidget extends StatefulWidget {
 }
 
 class _MainWidgetState extends State<MainWidget> {
-  //TextEditingController _controllerEmail;
-  //TextEditingController _controllerSenha;
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _body(context),
       drawer: DrawerDefault(),
+      key: _scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 300),
+        child: Container(
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(color: Colors.black12, spreadRadius: 5, blurRadius: 2)
+          ]),
+          width: MediaQuery.of(context).size.width,
+          height: 200,
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xfffff500), Color(0xFFFF1493)],
+                ),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30))),
+            child: Container(
+              child: Row(
+                children: [
+                  IconButton(
+                    padding: EdgeInsets.only(top: 0, bottom: 100),
+                    icon: new Icon(Icons.menu),
+                    onPressed: () { _scaffoldKey.currentState.openDrawer(); },
+                    color: Colors.white,
+                    iconSize: 40,
+                  ),
+                  Text(
+                    "Olá,",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                  Text(
+                    " Matheus Cocchi",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                  CircleAvatar(
+                    backgroundImage:
+                        AssetImage("assets/images/cocchi_lindo.png"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -29,39 +75,27 @@ class _MainWidgetState extends State<MainWidget> {
       child: Container(
         child: Column(
           children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 3,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xfffff500), Color(0xFFFF1493)],
-                  ),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50))),
-            ),
             ClipRRect(
-            child: Container(
-              margin: EdgeInsets.only(top: 10),
-              height: 130,
-              width: 350,
-              decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(90),
-              ),
-              ),
-              child: FlatButton(
-                onPressed: () {},
-                child: Image.asset(
-                  'assets/images/dog_triste.png',
-                  width: 350,
-                  height: 130,
-                  fit: BoxFit.fitWidth,
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+                height: 130,
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(90),
+                  ),
                 ),
-             
+                child: FlatButton(
+                  onPressed: () {},
+                  child: Image.asset(
+                    'assets/images/dog_triste.png',
+                    width: 350,
+                    height: 130,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
               ),
-            ),
-            borderRadius: BorderRadius.circular(90),
+              borderRadius: BorderRadius.circular(90),
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.2,
