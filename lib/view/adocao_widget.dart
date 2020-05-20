@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/view/passeadores_widget.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class AdocaoWidget extends StatefulWidget {
   @override
@@ -51,10 +52,42 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                     "Adoção",
                     style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
-                  Icon(
-                    Icons.filter_center_focus,
+                  IconButton(
+                    icon: new Icon(Icons.filter_center_focus),
+                    onPressed: () {
+                      return Alert(
+                          context: context,
+                          title: "FILTRO PARA ANIMAIS",
+                          content: Column(
+                            children: <Widget>[
+                              TextField(
+                                decoration: InputDecoration(
+                                  labelText: 'Distância',
+                                ),
+                              ),
+                              TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: 'Sexo',
+                                ),
+                              ),
+                            ],
+                          ),
+                          buttons: [
+                            DialogButton(
+                              radius: BorderRadius.all(Radius.circular(50)),
+                              color: Color(0xFFFF1471),
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(
+                                "LOGIN",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            )
+                          ]).show();
+                    },
                     color: Colors.white,
-                    size: 40,
+                    iconSize: 40,
                   ),
                 ],
               ),
