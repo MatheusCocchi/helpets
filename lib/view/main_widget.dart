@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/view/perfil_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/widgets/pink_button.dart';
@@ -18,46 +19,64 @@ class _MainWidgetState extends State<MainWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 300),
+        preferredSize: new Size(MediaQuery.of(context).size.width, 100.0),
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(color: Colors.black12, spreadRadius: 5, blurRadius: 2)
           ]),
           width: MediaQuery.of(context).size.width,
-          height: 200,
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xfffff500), Color(0xFFFF1493)],
+                  colors: [Color(0xFFFF1493), Color(0xfffff500)],
                 ),
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-            child: Container(
-              child: Row(
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.only(top: 0, bottom: 100),
-                    icon: new Icon(Icons.menu),
-                    onPressed: () { _scaffoldKey.currentState.openDrawer(); },
-                    color: Colors.white,
-                    iconSize: 40,
-                  ),
-                  Text(
-                    "Olá,",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                  Text(
-                    " Matheus Cocchi",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                  CircleAvatar(
-                    backgroundImage:
-                    AssetImage("assets/images/cocchi_lindo.png"),
-                  ),
-                ],
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20))),
+            child: SafeArea(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: new Icon(Icons.menu),
+                      onPressed: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      color: Colors.white,
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              "Olá,",
+                              textAlign: TextAlign.right,
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
+                            ),
+                            Text(
+                              " Matheus Cocchi",
+                              textAlign: TextAlign.right,
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage(
+                                    "assets/images/cocchi_lindo.png"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -73,50 +92,77 @@ class _MainWidgetState extends State<MainWidget> {
   _body(BuildContext context) {
     return SafeArea(
       child: Container(
-        child: Column(
+        padding: EdgeInsets.all(16),
+        child: ListView(
           children: <Widget>[
-            ClipRRect(
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-                height: 130,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(90),
-                  ),
-                ),
-                child: FlatButton(
-                  onPressed: () {},
-                  child: Image.asset(
-                    'assets/images/dog_triste.png',
-                    width: 350,
-                    height: 130,
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-              ),
-              borderRadius: BorderRadius.circular(90),
+            _menuInicialItem("assets/images/dog_sorriso.png", "Adotar", () {
+              push(context, AdocaoWidget());
+            }),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: _menuInicialItem(
+                  "assets/images/dog_feliz.png", "Passeadores", () {}),
             ),
             Container(
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: 50,
-              margin: EdgeInsets.only(top: 15),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFFF7300), Color(0xFFFF1493)],
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-              ),
-              child: PinkButton(
-                "Navegar p/ denuncia",
-                () {
-                  push(context, DenunciaWidget());
-                },
-              ),
+              margin: EdgeInsets.only(top: 10),
+              child: _menuInicialItem(
+                  "assets/images/doguinho.png", "Cuidadores", () {}),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: _menuInicialItem(
+                  "assets/images/dog_triste.png", "Denúncia", () {
+                push(context, DenunciaWidget());
+              }),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  _menuInicialItem(String img, String titulo, Function onTap) {
+    return ClipRRect(
+      child: Container(
+        height: 150,
+        width: MediaQuery.of(context).size.width,
+        child: InkWell(
+          child: Stack(
+            children: <Widget>[
+              Image.asset(
+                img,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
+              SizedBox.expand(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    titulo,
+                    style: TextStyle(
+                      color: Colors.white,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 3.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 8.0,
+                          color: Color.fromARGB(125, 0, 0, 255),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          onTap: onTap,
+        ),
+      ),
+      borderRadius: BorderRadius.circular(20),
     );
   }
 }
