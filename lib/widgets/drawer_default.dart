@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
+import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/denuncia_widget.dart';
 import 'package:helpets/view/main_widget.dart';
+import 'package:helpets/view/passeadores_widget.dart';
 
 class DrawerDefault extends StatelessWidget {
   @override
@@ -79,6 +81,14 @@ class DrawerDefault extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
+          onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CuidadoresWidget(),
+                ),
+              );
+            },
           ),
           ListTile(
             title: Text(
@@ -88,6 +98,14 @@ class DrawerDefault extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
+          onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PasseadoresWidget(),
+                ),
+              );
+            },
           ),
           ListTile(
             title: Text(

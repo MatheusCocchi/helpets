@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
-import 'package:helpets/view/passeadores_widget.dart';
 
-class AdocaoWidget extends StatefulWidget {
+class PasseadoresWidget extends StatefulWidget {
   @override
-  _AdocaoWidgetState createState() => _AdocaoWidgetState();
+  _PasseadoresWidgetState createState() => _PasseadoresWidgetState();
 }
 
-class _AdocaoWidgetState extends State<AdocaoWidget> {
+class _PasseadoresWidgetState extends State<PasseadoresWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   @override
@@ -48,7 +48,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                     iconSize: 40,
                   ),
                   Text(
-                    "Adoção",
+                    "Passeadores",
                     style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
                   Icon(
@@ -82,15 +82,15 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                       topLeft: Radius.circular(50))),
               child: FlatButton(
                 child: Text(
-                  "+ Cadastrar Animal",
+                  "+ Cadastrar Passeador",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 17,
                   ),
                 ),
                 onPressed: () {
-                  push(context, PasseadoresWidget());
+                  push(context, CuidadoresWidget());
                 },
               ),
             ),
