@@ -6,13 +6,17 @@ class PinkButton extends StatelessWidget {
 
   PinkButton(this.text, this.onPressed);
 
+  /*
+  gradient: LinearGradient(
+          colors: [Color(0xfffff500), Color(0xFFFF1471)],
+        ),
+   */
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xfffff500), Color(0xFFFF1471)],
-        ),
+        color: Color(0xFFFF1471),
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
+import 'package:helpets/view/cuidadores_widget.dart';
+import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/view/perfil_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/widgets/pink_button.dart';
@@ -95,25 +97,42 @@ class _MainWidgetState extends State<MainWidget> {
         padding: EdgeInsets.all(16),
         child: ListView(
           children: <Widget>[
-            _menuInicialItem("assets/images/dog_sorriso.png", "Adotar", () {
-              push(context, AdocaoWidget());
-            }),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: _menuInicialItem(
-                  "assets/images/dog_feliz.png", "Passeadores", () {}),
+            _menuInicialItem(
+              "assets/images/menu_adotar.jpg",
+              "Adotar",
+              () {
+                push(context, AdocaoWidget());
+              },
             ),
             Container(
               margin: EdgeInsets.only(top: 10),
               child: _menuInicialItem(
-                  "assets/images/doguinho.png", "Cuidadores", () {}),
+                "assets/images/menu_passeador.jpg",
+                "Passeadores",
+                () {
+                  push(context, PasseadoresWidget());
+                },
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),
               child: _menuInicialItem(
-                  "assets/images/dog_triste.png", "Denúncia", () {
-                push(context, DenunciaWidget());
-              }),
+                "assets/images/menu_cuidador.png",
+                "Cuidadores",
+                () {
+                  push(context, CuidadoresWidget());
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: _menuInicialItem(
+                "assets/images/menu_denuncia.jpg",
+                "Denúncia",
+                () {
+                  push(context, DenunciaWidget());
+                },
+              ),
             ),
           ],
         ),
@@ -141,6 +160,7 @@ class _MainWidgetState extends State<MainWidget> {
                     titulo,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 16,
                       shadows: <Shadow>[
                         Shadow(
                           offset: Offset(1.0, 1.0),

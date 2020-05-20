@@ -15,54 +15,53 @@ class _DenunciaWidgetState extends State<DenunciaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _body(context),
-      drawer: DrawerDefault(),
-      key: _scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 60),
+        preferredSize: new Size(MediaQuery.of(context).size.width, 60.0),
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(color: Colors.black12, spreadRadius: 5, blurRadius: 2)
           ]),
           width: MediaQuery.of(context).size.width,
-          height: 100,
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xfffff500), Color(0xFFFF1493)],
+                  colors: [Color(0xFFFF1493), Color(0xfffff500)],
                 ),
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-            child: Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: new Icon(Icons.menu),
-                    onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                    color: Colors.white,
-                    iconSize: 40,
-                  ),
-                  Text(
-                    "Denúncia",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                 Icon(
-                    Icons.filter_center_focus,
-                    color: Colors.transparent,
-                    size: 40,
-                  ),
-                ],
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20))),
+            child: SafeArea(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                child: Stack(
+                  children: [
+                    IconButton(
+                      icon: new Icon(Icons.menu),
+                      onPressed: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      color: Colors.white,
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          " Denúncia",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
+      body: _body(context),
+      drawer: DrawerDefault(),
+      key: _scaffoldKey,
     );
   }
 
@@ -70,62 +69,48 @@ class _DenunciaWidgetState extends State<DenunciaWidget> {
   _body(BuildContext context) {
     return SafeArea(
       child: Container(
+        padding: EdgeInsets.all(20),
         child: Column(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 50),
-              child: Text(
-                "Denúncia",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Color(0xFF000000),
-                  fontWeight: FontWeight.bold,
+            ClipRRect(
+              child: Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width,
+                child: Image.asset(
+                  "assets/images/menu_denuncia.jpg",
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
                 ),
               ),
+              borderRadius: BorderRadius.circular(20),
             ),
             Container(
-              height: 200,
-              width: 400,
-              margin: EdgeInsets.only(top: 5),
-              child: Column(
-                children: <Widget>[
-                  Image.asset("assets/images/dog_triste.png"),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 80, right: 80),
+              margin: EdgeInsets.only(top: 30),
               child: Text(
                 "Olá, sabemos que se você procurou este aplicativo é porque gosta muito dos animais, não é mesmo?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF000000),
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 80, right: 80, top: 50),
+              margin: EdgeInsets.only(top: 25),
               child: Text(
                 "Então não se esqueça que maus tratos aos animais é crime!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF000000),
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 80, right: 80, top: 50),
+              margin: EdgeInsets.only(top: 25),
               child: Text(
                 "Caso saiba de maus tratos denuncie! 0800 61 8080",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFF000000),
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

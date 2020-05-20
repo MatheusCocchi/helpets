@@ -15,6 +15,9 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   TextEditingController _controllerNome;
   TextEditingController _controllerRaca;
 
+  String valueEspecie = 'Selecione a espécie';
+  String valuePorte = 'Selecione o porte';
+
   ///método "principal" responsável por construir a tela cadastro de animal
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   _body(BuildContext context) {
     return SafeArea(
       child: Container(
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,7 +79,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
             Container(
               margin: EdgeInsets.only(top: 30),
               child: Text(
-                "Cadastro de Animal",
+                "Cadastrar Animal",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
@@ -100,18 +104,67 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: DropDown(),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFFF7300), Color(0xFFFF1493)],
+                    child: DropdownButton<String>(
+                      value: valueEspecie,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          valueEspecie = newValue;
+                        });
+                      },
+                      items: <String>[
+                        'Selecione a espécie',
+                        'Cachorro',
+                        'Gato',
+                        'Outra'
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: DropdownButton<String>(
+                      value: valuePorte,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          valuePorte = newValue;
+                        });
+                      },
+                      items: <String>[
+                        'Selecione o porte',
+                        'Pequeno',
+                        'Médio',
+                        'Grande'
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    width: MediaQuery.of(context).size.width,
                     child: PinkButton(
                       "Salvar",
                       () {
@@ -125,6 +178,26 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
           ],
         ),
       ),
+    );
+  }
+
+  _dropDownButton(List<DropdownMenuItem<String>> itens, String value) {
+    return DropdownButton<String>(
+      value: value,
+      icon: Icon(Icons.arrow_downward),
+      iconSize: 24,
+      elevation: 16,
+      style: TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+          value = newValue;
+        });
+      },
+      items: itens,
     );
   }
 }
