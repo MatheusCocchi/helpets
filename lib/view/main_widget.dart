@@ -17,9 +17,6 @@ class _MainWidgetState extends State<MainWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _body(context),
-      drawer: DrawerDefault(),
-      key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, 300),
         child: Container(
@@ -58,7 +55,7 @@ class _MainWidgetState extends State<MainWidget> {
                   ),
                   CircleAvatar(
                     backgroundImage:
-                        AssetImage("assets/images/cocchi_lindo.png"),
+                    AssetImage("assets/images/cocchi_lindo.png"),
                   ),
                 ],
               ),
@@ -66,6 +63,9 @@ class _MainWidgetState extends State<MainWidget> {
           ),
         ),
       ),
+      body: _body(context),
+      drawer: DrawerDefault(),
+      key: _scaffoldKey,
     );
   }
 

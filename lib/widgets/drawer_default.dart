@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/view/denuncia_widget.dart';
+import 'package:helpets/view/main_widget.dart';
 
 class DrawerDefault extends StatelessWidget {
   @override
@@ -10,22 +12,51 @@ class DrawerDefault extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-              decoration: BoxDecoration(color: Colors.white),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: Image.asset("assets/images/cocchi_lindo.png", fit: BoxFit.fill,
-                      width: 100, height:100),
+            decoration: BoxDecoration(color: Colors.white),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.asset(
+                      "assets/images/cocchi_lindo.png",
+                      fit: BoxFit.cover,
+                      width: 80,
+                      height: 80,
                     ),
-                  Text('Matheus Cocchi', style: TextStyle(color: Colors.black, fontSize: 25.0),)
-                  ],
-                ),
-              )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Text(
+                      'Bem-vindo(a), Matheus Cocchi',
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           ListTile(
             title: Text(
-              " Adotar",
+              "Início",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MainWidget(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text(
+              "Adotar",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -42,7 +73,7 @@ class DrawerDefault extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              " Cuidadores",
+              "Cuidadores",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -51,7 +82,7 @@ class DrawerDefault extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              " Passeadores",
+              "Passeadores",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -60,12 +91,15 @@ class DrawerDefault extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              " Sair",
+              "Sair",
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
+            onTap: () {
+              SystemNavigator.pop();
+            },
           ),
         ],
       ),
