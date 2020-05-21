@@ -3,6 +3,7 @@ import 'package:helpets/utils/nav.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:helpets/view/adotar_widget.dart';
 
 class AdocaoWidget extends StatefulWidget {
   @override
@@ -77,7 +78,9 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                             DialogButton(
                               radius: BorderRadius.all(Radius.circular(50)),
                               color: Color(0xFFFF1471),
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () {
+                                push(context, AdotarWidget());
+                              },
                               child: Text(
                                 "CONFIRMAR",
                                 style: TextStyle(
