@@ -57,7 +57,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                     onPressed: () {
                       return Alert(
                           context: context,
-                          title: "FILTRO PARA ANIMAIS",
+                          title: "FILTRO",
                           content: Column(
                             children: <Widget>[
                               TextField(
@@ -79,7 +79,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                               color: Color(0xFFFF1471),
                               onPressed: () => Navigator.pop(context),
                               child: Text(
-                                "LOGIN",
+                                "CONFIRMAR",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
