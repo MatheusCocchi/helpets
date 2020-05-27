@@ -2,6 +2,8 @@
 
 Projeto de TG da Fatec Ourinhos
 
+Autores: Daniel Alvarenga Tomaz, Mateus Zurdo Sierra, Matheus Cocchi Motta
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
