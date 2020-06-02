@@ -6,6 +6,7 @@ import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/denuncia_widget.dart';
 import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
+import 'package:helpets/view/listaAdocao_widget.dart';
 
 class DrawerDefault extends StatelessWidget {
   @override
@@ -103,6 +104,23 @@ class DrawerDefault extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => PasseadoresWidget(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text(
+              "Lista Adoção",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+          onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListaAdocaoWidget(),
                 ),
               );
             },
