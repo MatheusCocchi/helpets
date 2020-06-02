@@ -60,8 +60,9 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
 
   ///Corpo da tela de cadastro de usuário
   _body(BuildContext context) {
-    return SingleChildScrollView(
+    return SafeArea(
       child: Container(
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,

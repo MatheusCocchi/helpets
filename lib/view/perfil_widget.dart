@@ -55,105 +55,120 @@ class _PerfilWidgetState extends State<PerfilWidget> {
   }
 
   _body(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Image.asset(
-            "assets/images/cocchi.jpg",
-            width: 100,
-            height: 100,
-            fit: BoxFit.contain,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: Text(
-              "Perfil",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset(
+                "assets/images/cocchi_lindo.png",
+                fit: BoxFit.cover,
+                width: 100,
+                height: 100,
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            child: Text(
-              "Endereço: Rua Matheus Cocchi",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.bold,
-              ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: _viewDados(),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: Text(
-              "Cidade: Piraju",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: Text(
-              "Telefone: (14) 99999-9999",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 50),
-            child: Text(
-              "Alterar tipo de usuário:",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 70),
-            child: PinkButton(
-              "Salvar",
-              () {
-                push(context, LoginWidget());
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 2),
-            child: FlatButton(
-              child: Text(
-                "Apagar conta",
-                style: TextStyle(
-                  color: Color(0xFFFF1471),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              onPressed: () {
-                push(context, AdocaoWidget());
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  _viewDados() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Container(
+          child: Text(
+            "Perfil",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              color: Color(0xFF000000),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 30),
+          child: Text(
+            "Endereço: Rua Matheus Cocchi",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              color: Color(0xFF000000),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          child: Text(
+            "Cidade: Piraju",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              color: Color(0xFF000000),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          child: Text(
+            "Telefone: (14) 99999-9999",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              color: Color(0xFF000000),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 50),
+          child: Text(
+            "Alterar tipo de usuário:",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFF000000),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 70),
+          child: PinkButton(
+            "Salvar",
+            () {
+              push(context, LoginWidget());
+            },
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 2),
+          child: FlatButton(
+            child: Text(
+              "Apagar conta",
+              style: TextStyle(
+                color: Color(0xFFFF1471),
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            onPressed: () {
+              push(context, AdocaoWidget());
+            },
+          ),
+        ),
+      ],
     );
   }
 }

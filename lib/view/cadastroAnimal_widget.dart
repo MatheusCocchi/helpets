@@ -93,6 +93,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(top: 32),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 15),
@@ -104,16 +105,21 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
                     child: DropdownButton<String>(
                       value: valueEspecie,
                       icon: Icon(Icons.arrow_downward),
                       iconSize: 24,
                       elevation: 16,
-                      style: TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
-                      ),
+                      isExpanded: true,
+                      underline: SizedBox(),
                       onChanged: (String newValue) {
                         setState(() {
                           valueEspecie = newValue;
@@ -134,16 +140,21 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
                     child: DropdownButton<String>(
                       value: valuePorte,
                       icon: Icon(Icons.arrow_downward),
                       iconSize: 24,
                       elevation: 16,
-                      style: TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
-                      ),
+                      isExpanded: true,
+                      underline: SizedBox(),
                       onChanged: (String newValue) {
                         setState(() {
                           valuePorte = newValue;
@@ -178,26 +189,6 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
           ],
         ),
       ),
-    );
-  }
-
-  _dropDownButton(List<DropdownMenuItem<String>> itens, String value) {
-    return DropdownButton<String>(
-      value: value,
-      icon: Icon(Icons.arrow_downward),
-      iconSize: 24,
-      elevation: 16,
-      style: TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          value = newValue;
-        });
-      },
-      items: itens,
     );
   }
 }

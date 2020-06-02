@@ -9,7 +9,6 @@ class TextFieldPadrao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 1.2,
       height: 50,
       padding: EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
       decoration: BoxDecoration(
