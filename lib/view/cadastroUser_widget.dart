@@ -14,6 +14,16 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
   TextEditingController _controllerEndereco;
   TextEditingController _controllerNumero;
   TextEditingController _controllerBairro;
+  TextEditingController _controllerCep;
+  TextEditingController _controllerCidade;
+  TextEditingController _controllerNascimento;
+  TextEditingController _controllerTelefone;
+  TextEditingController _controllerEmail;
+  TextEditingController _controllerSenha;
+
+  String valueSexo = 'Selecione o sexo';
+  String valueTipo = 'Selecione o tipo de usuário';
+  String valueStatus = 'Selecione o status de usuário';
 
   ///método "principal" responsável por construir a tela de cadastro de usuário
   @override
@@ -60,7 +70,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
 
   ///Corpo da tela de cadastro de usuário
   _body(BuildContext context) {
-    return SafeArea(
+    return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -68,9 +78,9 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Image.asset(
-              "assets/images/ic_helpets_prov.png",
+              "assets/images/user.png",
               width: 100,
-              height: 100,
+              height: 100,   
               fit: BoxFit.contain,
             ),
             Container(
@@ -86,7 +96,6 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 1.5,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(top: 32),
               child: Column(
@@ -107,8 +116,135 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                     margin: EdgeInsets.only(top: 15),
                     child: TextFieldPadrao("Bairro", _controllerBairro),
                   ),
-                  Spacer(),
                   Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("CEP", _controllerCep),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Cidade", _controllerCidade),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                    child: DropdownButton<String>(
+                      value: valueSexo,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      isExpanded: true,
+                      underline: SizedBox(),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          valueSexo = newValue;
+                        });
+                      },
+                      items: <String>[
+                        'Selecione o sexo',
+                        'Masculino',
+                        'Feminino',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Data de Nascimento", _controllerNascimento),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Telefone", _controllerTelefone),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Email", _controllerEmail),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Senha", _controllerSenha),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                    child: DropdownButton<String>(
+                      value: valueTipo,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      isExpanded: true,
+                      underline: SizedBox(),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          valueTipo = newValue;
+                        });
+                      },
+                      items: <String>[
+                        'Selecione o tipo de usuário',
+                        'Comum',
+                        'Passeador',
+                        'Cuidador',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                    child: DropdownButton<String>(
+                      value: valueStatus,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      isExpanded: true,
+                      underline: SizedBox(),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          valueStatus = newValue;
+                        });
+                      },
+                      items: <String>[
+                        'Selecione o status de usuário',
+                        'Ativado',
+                        'Desativado',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 100),
                     width: MediaQuery.of(context).size.width / 1.2,
                     height: 50,
                     decoration: BoxDecoration(

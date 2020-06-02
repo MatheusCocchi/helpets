@@ -12,11 +12,17 @@ class CadastroAnimalWidget extends StatefulWidget {
 }
 
 class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
+  TextEditingController _controllerNomeDoador;
   TextEditingController _controllerNome;
   TextEditingController _controllerRaca;
+  TextEditingController _controllerIdade;
+  TextEditingController _controllerQualidade;
+  TextEditingController _controllerQualidadeDois;
+  TextEditingController _controllerQualidadeTres;
 
   String valueEspecie = 'Selecione a espécie';
   String valuePorte = 'Selecione o porte';
+  String valueSexo = 'Selecione o sexo';
 
   ///método "principal" responsável por construir a tela cadastro de animal
   @override
@@ -63,7 +69,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
 
   ///Corpo da tela de cadastro de animal
   _body(BuildContext context) {
-    return SafeArea(
+    return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -71,7 +77,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Image.asset(
-              "assets/images/ic_helpets_prov.png",
+              "assets/images/pata.png",
               width: 100,
               height: 100,
               fit: BoxFit.contain,
@@ -89,12 +95,16 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 2,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(top: 32),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao(
+                        "Nome do doador", _controllerNomeDoador),
+                  ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     child: TextFieldPadrao("Nome", _controllerNome),
@@ -174,7 +184,83 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(top: 15),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                    child: DropdownButton<String>(
+                      value: valueSexo,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      isExpanded: true,
+                      underline: SizedBox(),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          valueSexo = newValue;
+                        });
+                      },
+                      items: <String>[
+                        'Selecione o sexo',
+                        'Macho',
+                        'Fêmea',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Idade", _controllerIdade),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Qualidade 1", _controllerQualidade),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao(
+                        "Qualidade 2", _controllerQualidadeDois),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao(
+                        "Qualidade 3", _controllerQualidadeTres),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Carregar foto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                        Icon(Icons.photo_camera),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 100),
                     width: MediaQuery.of(context).size.width,
                     child: PinkButton(
                       "Salvar",
