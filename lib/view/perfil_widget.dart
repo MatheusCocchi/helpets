@@ -12,6 +12,8 @@ class PerfilWidget extends StatefulWidget {
 }
 
 class _PerfilWidgetState extends State<PerfilWidget> {
+  String valueTipo = 'Selecione o tipo de usuário';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,7 +146,38 @@ class _PerfilWidgetState extends State<PerfilWidget> {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 70),
+          margin: EdgeInsets.only(top: 15),
+          padding: EdgeInsets.only(top: 4, left: 16, right: 16),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+              color: Colors.white,
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]),
+          child: DropdownButton<String>(
+            value: valueTipo,
+            icon: Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            isExpanded: true,
+            underline: SizedBox(),
+            onChanged: (String newValue) {
+              setState(() {
+                valueTipo = newValue;
+              });
+            },
+            items: <String>[
+              'Selecione o tipo de usuário',
+              'Passeador',
+              'Cuidador',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 40),
           child: PinkButton(
             "Salvar",
             () {
