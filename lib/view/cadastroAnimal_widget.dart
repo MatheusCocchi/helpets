@@ -243,6 +243,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         color: Color(0xFFFF1471),
                         borderRadius: BorderRadius.all(Radius.circular(50))),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         FlatButton(
                           child: Text(
@@ -255,7 +256,38 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                           ),
                           onPressed: () {},
                         ),
-                        Icon(Icons.photo_camera),
+                        Icon(
+                          Icons.photo_camera,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                 Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Definir localização",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                        Icon(
+                          Icons.pin_drop,
+                          color: Colors.white,
+                        ),
                       ],
                     ),
                   ),
