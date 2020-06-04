@@ -13,6 +13,9 @@ class AdocaoWidget extends StatefulWidget {
 class _AdocaoWidgetState extends State<AdocaoWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
+  String valueDistancia = 'Selecione a distância';
+  String valueSexo = 'Selecione o sexo';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,15 +64,78 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                           title: "FILTRO",
                           content: Column(
                             children: <Widget>[
-                              TextField(
-                                decoration: InputDecoration(
-                                  labelText: 'Distância',
+                              Container(
+                                margin: EdgeInsets.only(top: 15),
+                                padding: EdgeInsets.only(
+                                    top: 4, left: 16, right: 16, bottom: 4),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black12, blurRadius: 5)
+                                    ]),
+                                child: DropdownButton<String>(
+                                  value: valueDistancia,
+                                  icon: Icon(Icons.arrow_downward),
+                                  iconSize: 24,
+                                  elevation: 16,
+                                  isExpanded: true,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      valueDistancia = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Selecione a distância',
+                                    '0 - 30 km',
+                                    '0 - 50 km',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
-                              TextField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  labelText: 'Sexo',
+                              Container(
+                                margin: EdgeInsets.only(top: 15),
+                                padding: EdgeInsets.only(
+                                    top: 4, left: 16, right: 16, bottom: 4),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black12, blurRadius: 5)
+                                    ]),
+                                child: DropdownButton<String>(
+                                  value: valueSexo,
+                                  icon: Icon(Icons.arrow_downward),
+                                  iconSize: 24,
+                                  elevation: 16,
+                                  isExpanded: true,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      valueSexo = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Selecione o sexo',
+                                    'Macho',
+                                    'Fêmea',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ],
