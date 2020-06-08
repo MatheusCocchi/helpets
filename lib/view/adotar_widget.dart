@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
+import 'package:helpets/view/passeadores_widget.dart';
 
 class AdotarWidget extends StatefulWidget {
   @override
@@ -8,7 +9,10 @@ class AdotarWidget extends StatefulWidget {
 }
 
 class _AdotarWidgetState extends State<AdotarWidget> {
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
   int _selectedIndex = 0;
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -106,7 +110,158 @@ class _AdotarWidgetState extends State<AdotarWidget> {
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width / 1.1,
+                margin: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                child: PageView(
+                  children: <Widget>[
+                    Image.asset("assets/images/melzinha.jpg",
+                    fit: BoxFit.cover,
+                    ),
+                    Image.asset("assets/images/melzinha_dois.jpg",
+                    fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "Mel -",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    " Persa",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                margin: EdgeInsets.only(left: 20, bottom: 20),
+                child: Text(
+                  "1 ano de idade",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 110,
+                      height: 40,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      child: Text(
+                        "Dócil",
+                        style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      width: 110,
+                      height: 40,
+                      margin: EdgeInsets.only(left: 10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      child: Text(
+                        "Carinhosa",
+                        style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      width: 110,
+                      height: 40,
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(left: 10),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(9),
+                        ),
+                      ),
+                      child: Text(
+                        "Sapeca",
+                        style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.2,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Color(0xFFFF1471),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(9),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Adotar",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  IconButton(
+                    icon: new Icon(Icons.pets),
+                    onPressed: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                    color: Colors.white,
+                    iconSize: 40,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
