@@ -98,7 +98,8 @@ void _onItemTapped(int index) {
                                     ]),
                                 child: DropdownButton<String>(
                                   value: valueDistancia,
-                                  icon: Icon(Icons.arrow_downward),
+                                  icon: Icon(Icons.arrow_downward,
+                                  color: Colors.black54,),
                                   iconSize: 24,
                                   elevation: 16,
                                   isExpanded: true,
@@ -116,7 +117,8 @@ void _onItemTapped(int index) {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                      style: TextStyle(color: Colors.black54),),
                                     );
                                   }).toList(),
                                 ),
@@ -135,7 +137,8 @@ void _onItemTapped(int index) {
                                     ]),
                                 child: DropdownButton<String>(
                                   value: valueSexo,
-                                  icon: Icon(Icons.arrow_downward),
+                                  icon: Icon(Icons.arrow_downward,
+                                  color: Colors.black54,),
                                   iconSize: 24,
                                   elevation: 16,
                                   isExpanded: true,
@@ -153,7 +156,8 @@ void _onItemTapped(int index) {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                      style: TextStyle(color: Colors.black54),),
                                     );
                                   }).toList(),
                                 ),

@@ -98,7 +98,8 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                     ]),
                                 child: DropdownButton<String>(
                                   value: valueDistancia,
-                                  icon: Icon(Icons.arrow_downward),
+                                  icon: Icon(Icons.arrow_downward,
+                                  color: Colors.black54,),
                                   iconSize: 24,
                                   elevation: 16,
                                   isExpanded: true,
@@ -116,7 +117,8 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                      style: TextStyle(color: Colors.black54),),
                                     );
                                   }).toList(),
                                 ),
@@ -135,7 +137,8 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                     ]),
                                 child: DropdownButton<String>(
                                   value: valueIdade,
-                                  icon: Icon(Icons.arrow_downward),
+                                  icon: Icon(Icons.arrow_downward,
+                                  color: Colors.black54,),
                                   iconSize: 24,
                                   elevation: 16,
                                   isExpanded: true,
@@ -154,7 +157,8 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,
+                                      style: TextStyle(color: Colors.black54),),
                                     );
                                   }).toList(),
                                 ),

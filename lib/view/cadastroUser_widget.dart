@@ -136,7 +136,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueSexo,
-                      icon: Icon(Icons.arrow_downward),
+                      icon: Icon(Icons.arrow_downward,
+                      color: Colors.black54,),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -153,7 +154,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                          style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
                     ),
@@ -186,7 +188,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueTipo,
-                      icon: Icon(Icons.arrow_downward),
+                      icon: Icon(Icons.arrow_downward,
+                      color: Colors.black54,),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -204,7 +207,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                          style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
                     ),
@@ -221,7 +225,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueStatus,
-                      icon: Icon(Icons.arrow_downward),
+                      icon: Icon(Icons.arrow_downward,
+                      color: Colors.black54,),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -238,7 +243,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                          style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
                     ),
