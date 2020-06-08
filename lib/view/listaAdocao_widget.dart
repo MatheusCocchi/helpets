@@ -13,6 +13,26 @@ class _ListaAdocaoWidgetState extends State<ListaAdocaoWidget> {
   final nomeAnimal = ['Daniel', 'Zurdo', 'Cocchi'];
   final idadeAnimal = ['3 anos de idade', '1 ano de idade', '2 anos de idade'];
 
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Chat',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Perfil',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,12 +79,26 @@ class _ListaAdocaoWidgetState extends State<ListaAdocaoWidget> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.pinkAccent,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble),
+            title: Text('Chat'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Perfil'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        onTap: _onItemTapped,
+      ),
     );
   }
 
   _bodyLista() {
-
-    
     return ListView.builder(
       padding: EdgeInsets.all(16),
       itemCount: nomeAnimal.length,
@@ -112,5 +146,4 @@ class _ListaAdocaoWidgetState extends State<ListaAdocaoWidget> {
       },
     );
   }
-
 }
