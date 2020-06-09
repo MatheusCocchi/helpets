@@ -80,7 +80,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
             Image.asset(
               "assets/images/user.png",
               width: 100,
-              height: 100,   
+              height: 100,
               fit: BoxFit.contain,
             ),
             Container(
@@ -136,8 +136,10 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueSexo,
-                      icon: Icon(Icons.arrow_downward,
-                      color: Colors.black54,),
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Colors.black54,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -154,15 +156,18 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,
-                          style: TextStyle(color: Colors.black54),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         );
                       }).toList(),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Data de Nascimento", _controllerNascimento),
+                    child: TextFieldPadrao(
+                        "Data de Nascimento", _controllerNascimento),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
@@ -188,8 +193,10 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueTipo,
-                      icon: Icon(Icons.arrow_downward,
-                      color: Colors.black54,),
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Colors.black54,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -207,8 +214,10 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,
-                          style: TextStyle(color: Colors.black54),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -225,8 +234,10 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueStatus,
-                      icon: Icon(Icons.arrow_downward,
-                      color: Colors.black54,),
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Colors.black54,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -243,10 +254,40 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,
-                          style: TextStyle(color: Colors.black54),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         );
                       }).toList(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Carregar foto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                        Icon(
+                          Icons.photo_camera,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
                   Container(
