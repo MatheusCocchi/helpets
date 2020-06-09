@@ -9,6 +9,7 @@ class ProcurarCuidadorWidget extends StatefulWidget {
 }
 
 class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -107,7 +108,123 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width / 1.1,
+                margin: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Image.asset(
+                    "assets/images/cocchi_lindo.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "Cocchi -",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    " Cuidador",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                margin: EdgeInsets.only(left: 20, bottom: 10),
+                child: Text(
+                  "Piraju - SP",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: MediaQuery.of(context).size.width / 1.1,
+                height: MediaQuery.of(context).size.height / 11,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFBFBFB),
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
+                child: Text(
+                  "Este Perfil está cadastrado como Cuidador, se estiver \n"
+                  "interessado(a) pode conversar com ele.",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.5,
+              height: MediaQuery.of(context).size.height / 15,
+              margin: EdgeInsets.only(top: 10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Color(0xFFFBFBFB),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Conversar com ele",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: new Icon(
+                      Icons.message,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                    color: Colors.white,
+                    iconSize: 40,
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
