@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/view/main_widget.dart';
@@ -111,7 +112,8 @@ class _LoginWidgetState extends State<LoginWidget> {
             child: PinkButton(
               "Entrar",
               () {
-                push(context, MainWidget());
+                //push(context, MainWidget());
+                FlutterOpenWhatsapp.sendSingleMessage("+5514998595670", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
               },
             ),
           ),
