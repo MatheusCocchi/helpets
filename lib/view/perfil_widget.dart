@@ -154,7 +154,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
               boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]),
           child: DropdownButton<String>(
             value: valueTipo,
-            icon: Icon(Icons.arrow_downward),
+            icon: Icon(Icons.arrow_downward,
+            color: Colors.black54,),
             iconSize: 24,
             elevation: 16,
             isExpanded: true,
@@ -171,7 +172,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value,
+                style: TextStyle(color: Colors.black54),),
               );
             }).toList(),
           ),

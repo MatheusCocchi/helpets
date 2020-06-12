@@ -125,7 +125,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueEspecie,
-                      icon: Icon(Icons.arrow_downward),
+                      icon: Icon(Icons.arrow_downward,
+                      color: Colors.black54,),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -143,7 +144,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                          style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
                     ),
@@ -160,7 +162,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valuePorte,
-                      icon: Icon(Icons.arrow_downward),
+                      icon: Icon(Icons.arrow_downward,
+                      color: Colors.black54,),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -178,7 +181,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                          style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
                     ),
@@ -195,7 +199,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueSexo,
-                      icon: Icon(Icons.arrow_downward),
+                      icon: Icon(Icons.arrow_downward,
+                      color: Colors.black54,),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -212,7 +217,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                          style: TextStyle(color: Colors.black54),),
                         );
                       }).toList(),
                     ),
