@@ -24,6 +24,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   rflutter_alert: ^1.0.2
   flutter_open_whatsapp: ^0.1.2
+  google_maps_flutter: ^0.5.28+1
   
 
 dev_dependencies:

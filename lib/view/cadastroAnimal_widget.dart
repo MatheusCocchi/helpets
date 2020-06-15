@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
+import 'package:helpets/view/map_widget.dart';
 import 'package:helpets/widgets/combobox_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
@@ -288,7 +289,9 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                               fontSize: 17,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                        push(context, MapWidget());
+                      },
                         ),
                         Icon(
                           Icons.pin_drop,
