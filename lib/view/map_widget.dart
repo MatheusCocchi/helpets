@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/passeadores_widget.dart';
@@ -10,6 +13,33 @@ class MapWidget extends StatefulWidget {
 
 class _MapWidgetState extends State<MapWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  Position _position;
+  StreamSubscription<Position> _positionStream;
+
+  @override
+  void initState() {
+    super.initState();
+    var locationOptions =
+        LocationOptions(accuracy: LocationAccuracy.high, distanceFilter: 10);
+    _positionStream = Geolocator()
+        .getPositionStream(locationOptions)
+        .listen((Position position) {
+      setState(() {
+        _position = position;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _positionStream.cancel();
+  }
+
+  latLng() {
+  return LatLng(_position.latitude, _position.longitude);
+  }
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -104,16 +134,11 @@ class _MapWidgetState extends State<MapWidget> {
   }
 
   _body(BuildContext context) {
-    return Container(
+    return SafeArea(
       child: GoogleMap(
-          initialCameraPosition: CameraPosition(
-        target: latLng(),
-        zoom: 17
-      )),
+          initialCameraPosition: CameraPosition(target: latLng(), zoom: 17)),
     );
   }
 }
 
-latLng() {
-  return LatLng(-23.2070976, -49.6045402);
-}
+

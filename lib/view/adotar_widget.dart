@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
 class AdotarWidget extends StatefulWidget {
   @override
@@ -265,7 +266,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                   IconButton(
                     icon: new Icon(Icons.pets),
                     onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
+                      FlutterOpenWhatsapp.sendSingleMessage("+5514998595670", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
                     },
                     color: Colors.white,
                     iconSize: 40,

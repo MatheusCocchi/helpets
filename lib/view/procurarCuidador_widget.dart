@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
 class ProcurarCuidadorWidget extends StatefulWidget {
   @override
@@ -216,7 +217,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
+                      FlutterOpenWhatsapp.sendSingleMessage("+5514998595670", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
                     },
                     color: Colors.white,
                     iconSize: 40,
