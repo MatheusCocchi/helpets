@@ -22,11 +22,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
       style: optionStyle,
     ),
     Text(
-      'Index 1: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Chat',
+      'Index 1: Chat',
       style: optionStyle,
     ),
   ];
@@ -93,17 +89,11 @@ class _AdotarWidgetState extends State<AdotarWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.pinkAccent,
-        type: BottomNavigationBarType.shifting,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             title: Text('Perfil'),
             backgroundColor: Colors.pinkAccent
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-            backgroundColor: Colors.pinkAccent,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble),

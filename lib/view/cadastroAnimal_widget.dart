@@ -341,8 +341,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                             ),
                           ),
                           onPressed: () {
-                            //push(context, MapWidget());
-                            convertImage();
+                            push(context, MapWidget());
                           },
                         ),
                         Icon(
@@ -358,8 +357,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                     child: PinkButton(
                       "Salvar",
                       () {
-                        //push(context, PerfilWidget());
-                        decodeImage();
+                        push(context, PerfilWidget());
+                       
                       },
                     ),
                   ),

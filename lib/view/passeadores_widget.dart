@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
+import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:helpets/view/procurarPasseador_widget.dart';
 
@@ -12,6 +13,8 @@ class PasseadoresWidget extends StatefulWidget {
 
 class _PasseadoresWidgetState extends State<PasseadoresWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+  TextEditingController _controllerCidade;
 
   String valueDistancia = 'Selecione a distância';
   String valueIdade = 'Selecione a idade';
@@ -86,42 +89,8 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                             children: <Widget>[
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                padding: EdgeInsets.only(
-                                    top: 4, left: 16, right: 16, bottom: 4),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12, blurRadius: 5)
-                                    ]),
-                                child: DropdownButton<String>(
-                                  value: valueDistancia,
-                                  icon: Icon(Icons.arrow_downward,
-                                  color: Colors.black54,),
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  isExpanded: true,
-                                  underline: SizedBox(),
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      valueDistancia = newValue;
-                                    });
-                                  },
-                                  items: <String>[
-                                    'Selecione a distância',
-                                    '0 - 30 km',
-                                    '0 - 50 km',
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value,
-                                      style: TextStyle(color: Colors.black54),),
-                                    );
-                                  }).toList(),
-                                ),
+                                child: TextFieldPadrao(
+                                    "Cidade", _controllerCidade),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
@@ -137,8 +106,10 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                     ]),
                                 child: DropdownButton<String>(
                                   value: valueIdade,
-                                  icon: Icon(Icons.arrow_downward,
-                                  color: Colors.black54,),
+                                  icon: Icon(
+                                    Icons.arrow_downward,
+                                    color: Colors.black54,
+                                  ),
                                   iconSize: 24,
                                   elevation: 16,
                                   isExpanded: true,
@@ -157,8 +128,10 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value,
-                                      style: TextStyle(color: Colors.black54),),
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(color: Colors.black54),
+                                      ),
                                     );
                                   }).toList(),
                                 ),
