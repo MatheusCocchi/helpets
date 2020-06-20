@@ -6,6 +6,8 @@ import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/recuperarSenha_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -22,6 +24,15 @@ class _LoginWidgetState extends State<LoginWidget> {
     return Scaffold(
       body: _stackGradient(context),
     );
+  }
+
+  login(){
+    var url = 'http://192.168.1.104:3001/users/login?login=guimontanher&password=15421542';
+    http.get(url).then((value){
+      print(value.body);
+    }).catchError((erro){
+      print(erro);
+    });
   }
 
   _stackGradient(BuildContext context) {
@@ -112,8 +123,18 @@ class _LoginWidgetState extends State<LoginWidget> {
             child: PinkButton(
               "Entrar",
               () {
-                //push(context, MainWidget());
-                FlutterOpenWhatsapp.sendSingleMessage("+5514998595670", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
+  login();
+//                login().then((value) {
+//                   if (value.statusCode == 200) {
+//                       var jsonResponse = convert.jsonDecode(value.body);
+//                       print(jsonResponse);
+//                   } else {
+//                       print("erro: $value");
+//                   }
+//
+//                  //push(context, MainWidget());
+//                });
+                //FlutterOpenWhatsapp.sendSingleMessage("+5514996810388", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
               },
             ),
           ),
