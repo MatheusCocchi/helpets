@@ -108,12 +108,12 @@ class _MainWidgetState extends State<MainWidget> {
         backgroundColor: Colors.pinkAccent,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             title: Text('Perfil'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble),
+            title: Text('Chat'),
           ),
         ],
         currentIndex: _selectedIndex,
