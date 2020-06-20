@@ -1,10 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
+import 'package:helpets/view/map_widget.dart';
 import 'package:helpets/widgets/combobox_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:helpets/view/perfil_widget.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CadastroAnimalWidget extends StatefulWidget {
   @override
@@ -19,6 +23,58 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   TextEditingController _controllerQualidade;
   TextEditingController _controllerQualidadeDois;
   TextEditingController _controllerQualidadeTres;
+
+  File _imageUm;
+  File _imageDois;
+  File _imageTres;
+  // final picker = ImagePicker();
+
+  Future getImageUmFromGallery() async {
+    //final pickedImage = await picker.getImage(source: ImageSource.gallery);
+    var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      //print(pickedImage);
+      this._imageUm = pickedImage;
+    });
+  }
+
+    Future getImageDoisFromGallery() async {
+    var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      this._imageDois = pickedImage;
+    });
+  }
+
+      Future getImageTresFromGallery() async {
+    var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      this._imageTres = pickedImage;
+    });
+  }
+
+  // Converte pra base64
+  String base64Image;
+  List<int> imageBytes;
+  var image;
+  void convertImage() {
+    imageBytes = _imageUm.readAsBytesSync();
+    base64Image = base64Encode(imageBytes);
+    print(base64Image);
+  }
+
+  // Tentar exibir 
+  void decodeImage(){
+    image = base64Decode(base64Image.toString());
+  }
+
+  /* Converte pra Bitmap 
+   void decodeImage(){
+     final decodedBytes = base64Decode(base64Image);
+     print(decodedBytes);
+   }*/
 
   String valueEspecie = 'Selecione a espécie';
   String valuePorte = 'Selecione o porte';
@@ -125,8 +181,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueEspecie,
-                      icon: Icon(Icons.arrow_downward,
-                      color: Colors.black54,),
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Colors.black54,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -144,8 +202,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,
-                          style: TextStyle(color: Colors.black54),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -162,8 +222,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valuePorte,
-                      icon: Icon(Icons.arrow_downward,
-                      color: Colors.black54,),
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Colors.black54,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -181,8 +243,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,
-                          style: TextStyle(color: Colors.black54),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -199,8 +263,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                         ]),
                     child: DropdownButton<String>(
                       value: valueSexo,
-                      icon: Icon(Icons.arrow_downward,
-                      color: Colors.black54,),
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Colors.black54,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       isExpanded: true,
@@ -217,8 +283,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,
-                          style: TextStyle(color: Colors.black54),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black54),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -260,7 +328,9 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                               fontSize: 17,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            getImageUmFromGallery();
+                          },
                         ),
                         Icon(
                           Icons.photo_camera,
@@ -269,7 +339,67 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       ],
                     ),
                   ),
-                 Container(
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Carregar foto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {
+                            getImageDoisFromGallery();
+                          },
+                        ),
+                        Icon(
+                          Icons.photo_camera,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Carregar foto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {
+                            getImageTresFromGallery();
+                          },
+                        ),
+                        Icon(
+                          Icons.photo_camera,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
                     margin: EdgeInsets.only(top: 15),
                     height: 50,
                     width: MediaQuery.of(context).size.width / 1.2,
@@ -288,7 +418,9 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                               fontSize: 17,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            push(context, MapWidget());
+                          },
                         ),
                         Icon(
                           Icons.pin_drop,
@@ -304,6 +436,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                       "Salvar",
                       () {
                         push(context, PerfilWidget());
+                       
                       },
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/view/passeadores_widget.dart';
+import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:helpets/view/adotar_widget.dart';
 
@@ -13,8 +14,11 @@ class AdocaoWidget extends StatefulWidget {
 class _AdocaoWidgetState extends State<AdocaoWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  String valueDistancia = 'Selecione a distância';
+  TextEditingController _controllerCidade;
+  TextEditingController _controllerRaca;
+
   String valueSexo = 'Selecione o sexo';
+  String valuePorte = 'Selecione o porte';
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -30,7 +34,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
     ),
   ];
 
-void _onItemTapped(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -86,42 +90,8 @@ void _onItemTapped(int index) {
                             children: <Widget>[
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                padding: EdgeInsets.only(
-                                    top: 4, left: 16, right: 16, bottom: 4),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12, blurRadius: 5)
-                                    ]),
-                                child: DropdownButton<String>(
-                                  value: valueDistancia,
-                                  icon: Icon(Icons.arrow_downward,
-                                  color: Colors.black54,),
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  isExpanded: true,
-                                  underline: SizedBox(),
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      valueDistancia = newValue;
-                                    });
-                                  },
-                                  items: <String>[
-                                    'Selecione a distância',
-                                    '0 - 30 km',
-                                    '0 - 50 km',
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value,
-                                      style: TextStyle(color: Colors.black54),),
-                                    );
-                                  }).toList(),
-                                ),
+                                child: TextFieldPadrao(
+                                    "Cidade", _controllerCidade),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
@@ -137,8 +107,10 @@ void _onItemTapped(int index) {
                                     ]),
                                 child: DropdownButton<String>(
                                   value: valueSexo,
-                                  icon: Icon(Icons.arrow_downward,
-                                  color: Colors.black54,),
+                                  icon: Icon(
+                                    Icons.arrow_downward,
+                                    color: Colors.black54,
+                                  ),
                                   iconSize: 24,
                                   elevation: 16,
                                   isExpanded: true,
@@ -156,11 +128,61 @@ void _onItemTapped(int index) {
                                       (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value,
-                                      style: TextStyle(color: Colors.black54),),
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(color: Colors.black54),
+                                      ),
                                     );
                                   }).toList(),
                                 ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 15),
+                                padding: EdgeInsets.only(
+                                    top: 4, left: 16, right: 16, bottom: 4),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black12, blurRadius: 5)
+                                    ]),
+                                child: DropdownButton<String>(
+                                  value: valuePorte,
+                                  icon: Icon(
+                                    Icons.arrow_downward,
+                                    color: Colors.black54,
+                                  ),
+                                  iconSize: 24,
+                                  elevation: 16,
+                                  isExpanded: true,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      valuePorte = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Selecione o porte',
+                                    'Pequeno',
+                                    'Médio',
+                                    'Grande',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(color: Colors.black54),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 15),
+                                child: TextFieldPadrao("Raça", _controllerRaca),
                               ),
                             ],
                           ),
@@ -188,7 +210,7 @@ void _onItemTapped(int index) {
           ),
         ),
       ),
-     bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.pinkAccent,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
