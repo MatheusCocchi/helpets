@@ -24,16 +24,34 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   TextEditingController _controllerQualidadeDois;
   TextEditingController _controllerQualidadeTres;
 
-  File _image;
+  File _imageUm;
+  File _imageDois;
+  File _imageTres;
   // final picker = ImagePicker();
 
-  Future getImageFromGallery() async {
+  Future getImageUmFromGallery() async {
     //final pickedImage = await picker.getImage(source: ImageSource.gallery);
     var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       //print(pickedImage);
-      this._image = pickedImage;
+      this._imageUm = pickedImage;
+    });
+  }
+
+    Future getImageDoisFromGallery() async {
+    var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      this._imageDois = pickedImage;
+    });
+  }
+
+      Future getImageTresFromGallery() async {
+    var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      this._imageTres = pickedImage;
     });
   }
 
@@ -42,7 +60,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   List<int> imageBytes;
   var image;
   void convertImage() {
-    imageBytes = _image.readAsBytesSync();
+    imageBytes = _imageUm.readAsBytesSync();
     base64Image = base64Encode(imageBytes);
     print(base64Image);
   }
@@ -311,7 +329,67 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                             ),
                           ),
                           onPressed: () {
-                            getImageFromGallery();
+                            getImageUmFromGallery();
+                          },
+                        ),
+                        Icon(
+                          Icons.photo_camera,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Carregar foto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {
+                            getImageDoisFromGallery();
+                          },
+                        ),
+                        Icon(
+                          Icons.photo_camera,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFF1471),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Carregar foto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onPressed: () {
+                            getImageTresFromGallery();
                           },
                         ),
                         Icon(
