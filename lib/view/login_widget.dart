@@ -27,7 +27,13 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 
   login(){
-    var url = 'http://192.168.1.104:3001/users/login?login=guimontanher&password=15421542';
+    //192.168.1.104
+    var test = "matheuscocchi@hotmail.com";
+    var test2 = "mc1234";
+    var url = 'http://192.168.5.5:3001/users/login?email=' +
+        test +
+        '&senha=' +
+        test2;
     http.get(url).then((value){
       print(value.body);
     }).catchError((erro){
