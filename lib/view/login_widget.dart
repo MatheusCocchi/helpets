@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/view/main_widget.dart';
@@ -26,11 +27,17 @@ class _LoginWidgetState extends State<LoginWidget> {
     );
   }
 
-  login(){
-    var url = 'http://192.168.1.104:3001/users/login?login=guimontanher&password=15421542';
-    http.get(url).then((value){
+  login() {
+    //192.168.1.104
+    var test = "matheuscocchi@hotmail.com";
+    var test2 = "mc1234";
+    var url = 'http://192.168.5.5:3001/users/login?email=' +
+        test +
+        '&senha=' +
+        test2;
+    http.get(url).then((value) {
       print(value.body);
-    }).catchError((erro){
+    }).catchError((erro) {
       print(erro);
     });
   }
@@ -123,7 +130,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             child: PinkButton(
               "Entrar",
               () {
-  login();
+                login();
 //                login().then((value) {
 //                   if (value.statusCode == 200) {
 //                       var jsonResponse = convert.jsonDecode(value.body);
