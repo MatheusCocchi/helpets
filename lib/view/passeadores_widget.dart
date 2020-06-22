@@ -16,12 +16,11 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
 
   TextEditingController _controllerCidade;
 
-  String valueDistancia = 'Selecione a distância';
   String valueIdade = 'Selecione a idade';
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Chat',
@@ -38,6 +37,12 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
       _selectedIndex = index;
     });
   }
+
+  final nomePessoa = ['Viviane Silva', 'Maurício de Souza', 'Rogério Marinke'];
+  final idadePessoa = ['27 anos', '26 anos', '45 anos'];
+  final cidadePessoa = ['Ourinhos-SP', 'Timburi-SP', 'Ourinhos-SP'];
+  final sexoPessoa = ['Feminino', 'Masculino', 'Masculino'];
+  final fotoPessoa = ['p2_foto1', 'p2_foto2', 'p2_foto3'];
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +78,10 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                       _scaffoldKey.currentState.openDrawer();
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Passeadores",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
                     icon: new Icon(Icons.filter_center_focus),
@@ -89,8 +93,8 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                             children: <Widget>[
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                child: TextFieldPadrao(
-                                    "Cidade", _controllerCidade, TextInputType.text),
+                                child: TextFieldPadrao("Cidade",
+                                    _controllerCidade, TextInputType.text),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
@@ -98,7 +102,7 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                     top: 4, left: 16, right: 16, bottom: 4),
                                 decoration: BoxDecoration(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
+                                    BorderRadius.all(Radius.circular(50)),
                                     color: Colors.white,
                                     boxShadow: [
                                       BoxShadow(
@@ -125,15 +129,15 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                                     '25 a 40 anos',
                                     'Maior que 40 anos',
                                   ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(color: Colors.black54),
-                                      ),
-                                    );
-                                  }).toList(),
+                                          (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(color: Colors.black54),
+                                          ),
+                                        );
+                                      }).toList(),
                                 ),
                               ),
                             ],
@@ -154,29 +158,12 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
                           ]).show();
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                 ],
               ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -185,29 +172,113 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
     return SafeArea(
       child: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 2, bottom: 500, left: 180),
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: 60,
-              decoration: BoxDecoration(
-                  color: Color(0xFFFF1471),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      topLeft: Radius.circular(50))),
-              child: FlatButton(
-                child: Text(
-                  "+ Cadastrar Passeador",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(16),
+                  itemCount: nomePessoa.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.all(12),
+                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 10)
+                          ]),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                "assets/images/" + fotoPessoa[index] + ".jpg",
+                                fit: BoxFit.cover,
+                                width: 100,
+                                height: 100,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              margin: EdgeInsets.only(left: 15),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "Nome:",
+                                        style: TextStyle(
+                                            color: Color(0xFFFF1471),
+                                            fontSize: 15),
+                                      ),
+                                      Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Text(nomePessoa[index])),
+                                    ],
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          "Idade:",
+                                          style: TextStyle(
+                                              color: Color(0xFFFF1471),
+                                              fontSize: 15),
+                                        ),
+                                        Container(
+                                            margin: EdgeInsets.only(left: 5),
+                                            child: Text(idadePessoa[index])),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          "Cidade:",
+                                          style: TextStyle(
+                                              color: Color(0xFFFF1471),
+                                              fontSize: 15),
+                                        ),
+                                        Container(
+                                            margin: EdgeInsets.only(left: 5),
+                                            child: Text(cidadePessoa[index])),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          "Sexo:",
+                                          style: TextStyle(
+                                              color: Color(0xFFFF1471),
+                                              fontSize: 15),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Text(sexoPessoa[index]),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-                onPressed: () {
-                  push(context, CuidadoresWidget());
-                },
               ),
             ),
           ],

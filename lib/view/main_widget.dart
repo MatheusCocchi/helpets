@@ -7,6 +7,7 @@ import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
+import 'package:helpets/view/perdidos_widget.dart';
 import 'package:helpets/view/perfil_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/widgets/pink_button.dart';
@@ -183,7 +184,7 @@ class _MainWidgetState extends State<MainWidget> {
                 "assets/images/menu_perdidos.jpg",
                 "Animais Perdidos",
                 () {
-                  push(context, AdocaoWidget());
+                  push(context, PerdidosWidget());
                 },
               ),
             ),

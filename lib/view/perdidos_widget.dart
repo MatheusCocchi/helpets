@@ -8,12 +8,12 @@ import 'package:helpets/view/adotar_widget.dart';
 
 import 'cadastroAnimal_widget.dart';
 
-class AdocaoWidget extends StatefulWidget {
+class PerdidosWidget extends StatefulWidget {
   @override
-  _AdocaoWidgetState createState() => _AdocaoWidgetState();
+  _PerdidosWidget createState() => _PerdidosWidget();
 }
 
-class _AdocaoWidgetState extends State<AdocaoWidget> {
+class _PerdidosWidget extends State<PerdidosWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   TextEditingController _controllerCidade;
@@ -36,11 +36,14 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
     ),
   ];
 
-  final nomeAnimal = ['Meg', 'Tobi', 'Floquinho'];
-  final racaAnimal = ['Indefinido', 'Indefinido', 'Indefinido'];
-  final porteAnimal = ['Pequeno', 'Pequeno', 'Pequeno'];
-  final sexoAnimal = ['Femea', 'Macho', 'Macho'];
-  final fotoAnimal = ['list1_dog1', 'list1_dog2', 'list1_cat1'];
+  final nomeAnimal = ['Snoop', 'Teka', 'Fred'];
+  final porteAnimal = ['Médio', 'Médio', 'Pequeno'];
+  final observacaoAnimal = [
+    'Visto ultima vez no bairro Vila X de Piraju',
+    'Visto próximo ao MC Donalds de Ourinhos',
+    'Esta sendo mantido em minha casa, entrar em contato.'
+  ];
+  final fotoAnimal = ['list2_dog1', 'list2_dog2', 'list2_cat1'];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -84,7 +87,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                     color: Colors.white,
                   ),
                   Text(
-                    "Adoção",
+                    "Animais Perdidos",
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
@@ -296,54 +299,36 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                                           child: Text(nomeAnimal[index])),
                                     ],
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Porte:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
-                                            margin: EdgeInsets.only(left: 5),
-                                            child: Text(porteAnimal[index])),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Raça:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
-                                            margin: EdgeInsets.only(left: 5),
-                                            child: Text(racaAnimal[index])),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Sexo:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "Porte:",
+                                        style: TextStyle(
+                                            color: Color(0xFFFF1471),
+                                            fontSize: 15),
+                                      ),
+                                      Container(
                                           margin: EdgeInsets.only(left: 5),
-                                          child: Text(sexoAnimal[index]),
-                                        ),
-                                      ],
-                                    ),
+                                          child: Text(porteAnimal[index])),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "Observação:",
+                                        style: TextStyle(
+                                            color: Color(0xFFFF1471),
+                                            fontSize: 15),
+                                      ),
+                                      Container(
+                                          child: Text(
+                                        observacaoAnimal[index],
+                                        maxLines: 2,
+                                      )),
+                                    ],
                                   ),
                                 ],
                               ),
