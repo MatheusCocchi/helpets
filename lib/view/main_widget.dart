@@ -10,6 +10,7 @@ import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/view/perfil_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/widgets/pink_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'denuncia_widget.dart';
 
@@ -21,11 +22,11 @@ class MainWidget extends StatefulWidget {
 class _MainWidgetState extends State<MainWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final nomeUser = ' Matheus Cocchi';
+  var nomeUser = '';
   String userJson = "";
-  Usuario usuario = new Usuario();
+  Usuario usuario;
 
-    int _selectedIndex = 0;
+  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -45,15 +46,27 @@ class _MainWidgetState extends State<MainWidget> {
     });
   }
 
+  Future<String> getUserLogado() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String a = prefs.getString('userLogado');
+    print("MATHEUS - " + a);
+    return a;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
-    userJson = Prefs().getUserLogado();
 
-    Map userMap = json.decode(userJson);
-
-    usuario = Usuario().toUser(userMap);
     super.initState();
+
+    getUserLogado().then((value) {
+      userJson = value;
+      Map userMap = json.decode(userJson.toString());
+
+      usuario = Usuario().toUser(userMap);
+      nomeUser = usuario.nome;
+    });
   }
 
   @override
@@ -100,7 +113,7 @@ class _MainWidgetState extends State<MainWidget> {
                                   TextStyle(fontSize: 14, color: Colors.white),
                             ),
                             Text(
-                              usuario.nome,
+                              nomeUser,
                               textAlign: TextAlign.right,
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),
@@ -123,7 +136,7 @@ class _MainWidgetState extends State<MainWidget> {
           ),
         ),
       ),
-       bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.pinkAccent,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

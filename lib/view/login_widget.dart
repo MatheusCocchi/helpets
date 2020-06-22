@@ -17,11 +17,8 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController _controllerEmail;
-  TextEditingController _controllerSenha;
-
-
-
+  TextEditingController _controllerEmail = new TextEditingController();
+  TextEditingController _controllerSenha = new TextEditingController();
 
   Future<bool> verificarUserLogado() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,12 +37,14 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   void initState() {
     // TODO: implement initState
+    super.initState();
+    _controllerEmail.text = "";
+    _controllerSenha.text = "";
     verificarUserLogado().then((value) {
-      if(value) {
+      if (value) {
         push(context, MainWidget());
       }
     });
-    super.initState();
   }
 
   ///método "principal" responsável por construir a tela de login
@@ -79,12 +78,13 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 
   login() {
-    if (_controllerEmail.text.isEmpty || _controllerSenha.text.isEmpty) {
+    if (_controllerEmail.text.toString().isEmpty ||
+        _controllerSenha.text.toString().isEmpty) {
       _showDialog("Login", "Preencha todos os campos!");
     } else {
-      var email = _controllerEmail.text;
-      var senha = _controllerSenha.text;
-      var url = 'http://192.168.5.5:3001/users/login?email=' +
+      var email = _controllerEmail.text.toString();
+      var senha = _controllerSenha.text.toString();
+      var url = 'http://192.168.5.10:3001/users/login?email=' +
           email +
           '&senha=' +
           senha;

@@ -12,7 +12,7 @@ class Usuario {
   String sexo;
   int idade;
   String tipo;
-  DateTime datacad;
+  String datacad;
   int status;
 
   Usuario(
@@ -68,5 +68,6 @@ class Usuario {
         tipo: mapUser["tipo"],
         datacad: mapUser["datacad"],
         status: mapUser["status"]);
+    return u;
   }
 }
