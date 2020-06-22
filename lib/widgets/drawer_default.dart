@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/denuncia_widget.dart';
+import 'package:helpets/view/login_widget.dart';
 import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/view/listaAdocao_widget.dart';
@@ -134,7 +136,8 @@ class DrawerDefault extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             onTap: () {
-              SystemNavigator.pop();
+              Prefs().removeValues();
+              pushReplacement(context, LoginWidget());
             },
           ),
         ],

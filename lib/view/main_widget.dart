@@ -13,6 +13,7 @@ import 'package:helpets/widgets/pink_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'denuncia_widget.dart';
+import 'dart:convert' show utf8;
 
 class MainWidget extends StatefulWidget {
   @override
@@ -57,7 +58,6 @@ class _MainWidgetState extends State<MainWidget> {
   @override
   void initState() {
     // TODO: implement initState
-
     super.initState();
 
     getUserLogado().then((value) {
@@ -66,6 +66,7 @@ class _MainWidgetState extends State<MainWidget> {
 
       usuario = Usuario().toUser(userMap);
       nomeUser = usuario.nome;
+      setState(() {});
     });
   }
 

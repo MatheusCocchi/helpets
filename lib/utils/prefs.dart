@@ -71,5 +71,7 @@ class Prefs {
     prefs.remove("intValue");
     //Remove double
     prefs.remove("doubleValue");
+
+    prefs.remove("userLogado");
   }
 }
