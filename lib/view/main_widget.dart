@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
@@ -18,6 +22,8 @@ class _MainWidgetState extends State<MainWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   final nomeUser = ' Matheus Cocchi';
+  String userJson = "";
+  Usuario usuario = new Usuario();
 
     int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -37,6 +43,17 @@ class _MainWidgetState extends State<MainWidget> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    userJson = Prefs().getUserLogado();
+
+    Map userMap = json.decode(userJson);
+
+    usuario = Usuario().toUser(userMap);
+    super.initState();
   }
 
   @override
@@ -83,7 +100,7 @@ class _MainWidgetState extends State<MainWidget> {
                                   TextStyle(fontSize: 14, color: Colors.white),
                             ),
                             Text(
-                              nomeUser,
+                              usuario.nome,
                               textAlign: TextAlign.right,
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),

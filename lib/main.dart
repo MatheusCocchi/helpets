@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/login_widget.dart';
+import 'package:helpets/view/main_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +26,27 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginWidget(),
+      home: result() ? LoginWidget() : MainWidget(),
     );
+  }
+
+  bool result() {
+    verificarUserLogado().then((value) {
+      return value;
+    });
+  }
+
+  Future<bool> verificarUserLogado() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool CheckValue = prefs.containsKey('userLogado');
+    if (CheckValue) {
+      if (Prefs().getUserLogado() != "") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

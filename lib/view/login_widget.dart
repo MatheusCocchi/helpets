@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/recuperarSenha_widget.dart';
@@ -59,14 +60,16 @@ class _LoginWidgetState extends State<LoginWidget> {
           '&senha=' +
           senha;
       http.get(url).then((value) {
-
-        if (value.body == "" || value.body.contains("")) {
-
-        }
-
         print(value.body);
+        if (value.body == "" || value.body.contains("Erro")) {
+          _showDialog("Login", "Erro de validação, tente novamente.");
+        } else {
+          Prefs().addUser(value.body);
+          push(context, MainWidget());
+        }
       }).catchError((erro) {
         print(erro);
+        _showDialog("Login", "Ocorreu um erro inesperado, tente novamente.");
       });
     }
   }
@@ -160,16 +163,6 @@ class _LoginWidgetState extends State<LoginWidget> {
               "Entrar",
               () {
                 login();
-//                login().then((value) {
-//                   if (value.statusCode == 200) {
-//                       var jsonResponse = convert.jsonDecode(value.body);
-//                       print(jsonResponse);
-//                   } else {
-//                       print("erro: $value");
-//                   }
-//
-//                  //push(context, MainWidget());
-//                });
                 //FlutterOpenWhatsapp.sendSingleMessage("+5514996810388", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
               },
             ),

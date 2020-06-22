@@ -1,107 +1,72 @@
 class Usuario {
-  int _codigo;
-  String _nome;
-  String _senha;
-  String _email;
-  String _endereco;
-  int _numero;
-  String _cep;
-  String _bairro;
-  String _cidade;
-  String _telefone;
-  String _sexo;
-  int _idade;
-  String _tipo;
-  DateTime _datacad;
-  int _status;
+  int codigo;
+  String nome;
+  String senha;
+  String email;
+  String endereco;
+  int numero;
+  String cep;
+  String bairro;
+  String cidade;
+  String telefone;
+  String sexo;
+  int idade;
+  String tipo;
+  DateTime datacad;
+  int status;
 
-  int get codigo => _codigo;
+  Usuario(
+      {this.codigo,
+      this.nome,
+      this.senha,
+      this.email,
+      this.endereco,
+      this.numero,
+      this.cep,
+      this.bairro,
+      this.cidade,
+      this.telefone,
+      this.sexo,
+      this.idade,
+      this.tipo,
+      this.datacad,
+      this.status});
 
-  set codigo(int value) {
-    _codigo = value;
+  Map<String, dynamic> toMap() {
+    return {
+      'nome': nome,
+      'senha': senha,
+      'email': email,
+      'endereco': endereco,
+      'numero': numero,
+      'cep': cep,
+      'bairro': bairro,
+      'cidade': cidade,
+      'telefone': telefone,
+      'sexo': sexo,
+      'idade': idade,
+      'tipo': tipo,
+      'datacad': datacad,
+      'status': status,
+    };
   }
 
-  String get nome => _nome;
-
-  int get status => _status;
-
-  set status(int value) {
-    _status = value;
-  }
-
-  DateTime get datacad => _datacad;
-
-  set datacad(DateTime value) {
-    _datacad = value;
-  }
-
-  String get tipo => _tipo;
-
-  set tipo(String value) {
-    _tipo = value;
-  }
-
-  int get idade => _idade;
-
-  set idade(int value) {
-    _idade = value;
-  }
-
-  String get sexo => _sexo;
-
-  set sexo(String value) {
-    _sexo = value;
-  }
-
-  String get telefone => _telefone;
-
-  set telefone(String value) {
-    _telefone = value;
-  }
-
-  String get cidade => _cidade;
-
-  set cidade(String value) {
-    _cidade = value;
-  }
-
-  String get bairro => _bairro;
-
-  set bairro(String value) {
-    _bairro = value;
-  }
-
-  String get cep => _cep;
-
-  set cep(String value) {
-    _cep = value;
-  }
-
-  int get numero => _numero;
-
-  set numero(int value) {
-    _numero = value;
-  }
-
-  String get endereco => _endereco;
-
-  set endereco(String value) {
-    _endereco = value;
-  }
-
-  String get email => _email;
-
-  set email(String value) {
-    _email = value;
-  }
-
-  String get senha => _senha;
-
-  set senha(String value) {
-    _senha = value;
-  }
-
-  set nome(String value) {
-    _nome = value;
+  Usuario toUser(Map<String, dynamic> mapUser) {
+    Usuario u = new Usuario(
+        codigo: mapUser["codigo"],
+        nome: mapUser["nome"],
+        senha: mapUser["senha"],
+        email: mapUser["email"],
+        endereco: mapUser["endereco"],
+        numero: mapUser["numero"],
+        cep: mapUser["cep"],
+        bairro: mapUser["bairro"],
+        cidade: mapUser["cidade"],
+        telefone: mapUser["telefone"],
+        sexo: mapUser["sexo"],
+        idade: mapUser["idade"],
+        tipo: mapUser["tipo"],
+        datacad: mapUser["datacad"],
+        status: mapUser["status"]);
   }
 }
