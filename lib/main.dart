@@ -26,27 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: result() ? LoginWidget() : MainWidget(),
+      home: LoginWidget(),
     );
-  }
-
-  bool result() {
-    verificarUserLogado().then((value) {
-      return value;
-    });
-  }
-
-  Future<bool> verificarUserLogado() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool CheckValue = prefs.containsKey('userLogado');
-    if (CheckValue) {
-      if (Prefs().getUserLogado() != "") {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
   }
 }

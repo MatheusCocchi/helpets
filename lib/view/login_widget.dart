@@ -9,6 +9,7 @@ import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -18,6 +19,34 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController _controllerEmail;
   TextEditingController _controllerSenha;
+
+
+
+
+  Future<bool> verificarUserLogado() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool CheckValue = prefs.containsKey('userLogado');
+    if (CheckValue) {
+      if (Prefs().getUserLogado() != "") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    verificarUserLogado().then((value) {
+      if(value) {
+        push(context, MainWidget());
+      }
+    });
+    super.initState();
+  }
 
   ///método "principal" responsável por construir a tela de login
   @override
