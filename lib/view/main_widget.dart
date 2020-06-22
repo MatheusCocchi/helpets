@@ -17,6 +17,8 @@ class MainWidget extends StatefulWidget {
 class _MainWidgetState extends State<MainWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
+  final nomeUser = ' Matheus Cocchi';
+
     int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -81,7 +83,7 @@ class _MainWidgetState extends State<MainWidget> {
                                   TextStyle(fontSize: 14, color: Colors.white),
                             ),
                             Text(
-                              " Matheus Cocchi",
+                              nomeUser,
                               textAlign: TextAlign.right,
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),

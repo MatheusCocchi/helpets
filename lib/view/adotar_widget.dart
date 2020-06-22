@@ -12,6 +12,13 @@ class AdotarWidget extends StatefulWidget {
 class _AdotarWidgetState extends State<AdotarWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
+  final nomeAnimal = 'Mel - ';
+  final racaAnimal = ' Persa';
+  final idadeAnimal = '1 ano de idade';
+  final qualidadeUm = 'Dócil';
+  final qualidadeDois = 'Carinhosa';
+  final qualidadeTres = 'Sapeca';
+
   int _selectedIndex = 0;
 
   static const TextStyle optionStyle =
@@ -143,7 +150,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    "Mel -",
+                    nomeAnimal,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -151,7 +158,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                     ),
                   ),
                   Text(
-                    " Persa",
+                    racaAnimal,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -166,7 +173,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
               child: Container(
                 margin: EdgeInsets.only(left: 20, bottom: 20),
                 child: Text(
-                  "1 ano de idade",
+                  idadeAnimal,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -193,7 +200,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                         ),
                       ),
                       child: Text(
-                        "Dócil",
+                        qualidadeUm,
                         style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -209,7 +216,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                         ),
                       ),
                       child: Text(
-                        "Carinhosa",
+                        qualidadeDois,
                         style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -225,7 +232,7 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                         ),
                       ),
                       child: Text(
-                        "Sapeca",
+                        qualidadeTres,
                         style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),

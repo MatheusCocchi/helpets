@@ -11,6 +11,12 @@ class ProcurarCuidadorWidget extends StatefulWidget {
 
 class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+  final nomeCuidador = 'Cocchi -';
+  final tipo = ' Cuidador';
+  final cidadeEstado = 'Piraju';
+
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -133,7 +139,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    "Cocchi -",
+                    nomeCuidador,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -141,7 +147,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                     ),
                   ),
                   Text(
-                    " Cuidador",
+                    tipo,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -156,7 +162,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
               child: Container(
                 margin: EdgeInsets.only(left: 20, bottom: 10),
                 child: Text(
-                  "Piraju - SP",
+                  cidadeEstado,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
