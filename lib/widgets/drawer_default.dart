@@ -21,6 +21,7 @@ class DrawerDefault extends StatefulWidget {
 
 class _State extends State<DrawerDefault> {
   var nomeUser = '';
+  var sexoUser = '';
   String userJson = "";
   Usuario usuario;
 
@@ -42,6 +43,7 @@ class _State extends State<DrawerDefault> {
 
       usuario = Usuario().toUser(userMap);
       nomeUser = usuario.nome;
+      sexoUser = usuario.sexo;
       setState(() {});
     });
   }
@@ -60,7 +62,9 @@ class _State extends State<DrawerDefault> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: Image.asset(
-                      "assets/images/cocchi_lindo.png",
+                      sexoUser.startsWith("M")
+                          ? "assets/images/user_default_m.jpg"
+                          : "assets/images/user_default_f.jpg",
                       fit: BoxFit.cover,
                       width: 80,
                       height: 80,

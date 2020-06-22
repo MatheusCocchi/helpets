@@ -24,6 +24,7 @@ class _MainWidgetState extends State<MainWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   var nomeUser = '';
+  var sexoUser = '';
   String userJson = "";
   Usuario usuario;
 
@@ -66,6 +67,7 @@ class _MainWidgetState extends State<MainWidget> {
 
       usuario = Usuario().toUser(userMap);
       nomeUser = usuario.nome;
+      sexoUser = usuario.sexo;
       setState(() {});
     });
   }
@@ -123,7 +125,9 @@ class _MainWidgetState extends State<MainWidget> {
                               margin: EdgeInsets.only(left: 5),
                               child: CircleAvatar(
                                 backgroundImage: AssetImage(
-                                    "assets/images/cocchi_lindo.png"),
+                                    sexoUser.startsWith("M")
+                                        ? "assets/images/user_default_m.jpg"
+                                        : "assets/images/user_default_f.jpg"),
                               ),
                             ),
                           ],
