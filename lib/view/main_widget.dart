@@ -110,7 +110,7 @@ class _MainWidgetState extends State<MainWidget> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              "Olá,",
+                              "Olá, ",
                               textAlign: TextAlign.right,
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),
@@ -176,6 +176,16 @@ class _MainWidgetState extends State<MainWidget> {
               () {
                 push(context, AdocaoWidget());
               },
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: _menuInicialItem(
+                "assets/images/menu_perdidos.jpg",
+                "Animais Perdidos",
+                () {
+                  push(context, AdocaoWidget());
+                },
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),

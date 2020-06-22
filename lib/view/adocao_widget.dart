@@ -6,6 +6,8 @@ import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:helpets/view/adotar_widget.dart';
 
+import 'cadastroAnimal_widget.dart';
+
 class AdocaoWidget extends StatefulWidget {
   @override
   _AdocaoWidgetState createState() => _AdocaoWidgetState();
@@ -33,6 +35,9 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
       style: optionStyle,
     ),
   ];
+
+  final nomeAnimal = ['Daniel', 'Zurdo', 'Cocchi'];
+  final idadeAnimal = ['3 anos de idade', '1 ano de idade', '2 anos de idade'];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -74,11 +79,10 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                       _scaffoldKey.currentState.openDrawer();
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Adoção",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
                     icon: new Icon(Icons.filter_center_focus),
@@ -90,8 +94,8 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                             children: <Widget>[
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                child: TextFieldPadrao(
-                                    "Cidade", _controllerCidade, TextInputType.text),
+                                child: TextFieldPadrao("Cidade",
+                                    _controllerCidade, TextInputType.text),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
@@ -182,7 +186,8 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                child: TextFieldPadrao("Raça", _controllerRaca, TextInputType.text),
+                                child: TextFieldPadrao("Raça", _controllerRaca,
+                                    TextInputType.text),
                               ),
                             ],
                           ),
@@ -210,22 +215,6 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
-      ),
     );
   }
 
@@ -233,10 +222,9 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
     return SafeArea(
       child: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 2, bottom: 500, left: 180),
+              margin: EdgeInsets.only(top: 15, left: 180),
               width: MediaQuery.of(context).size.width / 1.2,
               height: 60,
               decoration: BoxDecoration(
@@ -254,8 +242,60 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                   ),
                 ),
                 onPressed: () {
-                  push(context, PasseadoresWidget());
+                  push(context, CadastroAnimalWidget());
                 },
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(16),
+                  itemCount: nomeAnimal.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.all(8),
+                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 10)
+                          ]),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.asset(
+                                "assets/images/cocchi_lindo.png",
+                                fit: BoxFit.cover,
+                                width: 80,
+                                height: 80,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: <Widget>[
+                                Text(nomeAnimal[index]),
+                                Container(
+                                  margin: EdgeInsets.only(top: 5),
+                                  child: Text(idadeAnimal[index]),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Icon(Icons.chat),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
