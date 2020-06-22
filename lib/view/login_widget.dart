@@ -26,19 +26,49 @@ class _LoginWidgetState extends State<LoginWidget> {
     );
   }
 
-  login(){
-    //192.168.1.104
-    var test = "matheuscocchi@hotmail.com";
-    var test2 = "mc1234";
-    var url = 'http://192.168.5.5:3001/users/login?email=' +
-        test +
-        '&senha=' +
-        test2;
-    http.get(url).then((value){
-      print(value.body);
-    }).catchError((erro){
-      print(erro);
-    });
+  void _showDialog(String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(msg),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  login() {
+    if (_controllerEmail.text.isEmpty || _controllerSenha.text.isEmpty) {
+      _showDialog("Login", "Preencha todos os campos!");
+    } else {
+      var email = _controllerEmail.text;
+      var senha = _controllerSenha.text;
+      var url = 'http://192.168.5.5:3001/users/login?email=' +
+          email +
+          '&senha=' +
+          senha;
+      http.get(url).then((value) {
+
+        if (value.body == "" || value.body.contains("")) {
+
+        }
+
+        print(value.body);
+      }).catchError((erro) {
+        print(erro);
+      });
+    }
   }
 
   _stackGradient(BuildContext context) {
@@ -129,7 +159,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             child: PinkButton(
               "Entrar",
               () {
-  login();
+                login();
 //                login().then((value) {
 //                   if (value.statusCode == 200) {
 //                       var jsonResponse = convert.jsonDecode(value.body);
