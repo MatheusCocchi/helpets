@@ -15,7 +15,6 @@ class _RecuperarSenhaWidgetState extends State<RecuperarSenhaWidget> {
   TextEditingController _controllerSenha;
   TextEditingController _controllerConfirmarSenha;
 
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +57,6 @@ class _RecuperarSenhaWidgetState extends State<RecuperarSenhaWidget> {
     );
   }
 
-
   _body(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
@@ -86,15 +84,18 @@ class _RecuperarSenhaWidgetState extends State<RecuperarSenhaWidget> {
           ),
           Container(
             margin: EdgeInsets.only(top: 50),
-            child: TextFieldPadrao("E-mail", _controllerEmail),
+            child: TextFieldPadrao(
+                "E-mail", _controllerEmail, TextInputType.emailAddress),
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: TextFieldPadrao("Nova Senha", _controllerSenha),
+            child: TextFieldPadrao(
+                "Nova Senha", _controllerSenha, TextInputType.text),
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: TextFieldPadrao("Confirmar nova senha", _controllerConfirmarSenha),
+            child: TextFieldPadrao("Confirmar nova senha",
+                _controllerConfirmarSenha, TextInputType.text),
           ),
           Container(
             margin: EdgeInsets.only(top: 100),

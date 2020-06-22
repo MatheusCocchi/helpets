@@ -42,7 +42,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     _controllerSenha.text = "";
     verificarUserLogado().then((value) {
       if (value) {
-        push(context, MainWidget());
+        pushReplacement(context, MainWidget());
       }
     });
   }
@@ -94,7 +94,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           _showDialog("Login", "Erro de validação, tente novamente.");
         } else {
           Prefs().addUser(value.body);
-          push(context, MainWidget());
+          pushReplacement(context, MainWidget());
         }
       }).catchError((erro) {
         print(erro);
@@ -166,11 +166,13 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: TextFieldPadrao("E-mail", _controllerEmail),
+            child: TextFieldPadrao(
+                "E-mail", _controllerEmail, TextInputType.emailAddress),
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            child: TextFieldPadrao("Senha", _controllerSenha),
+            child:
+                TextFieldPadrao("Senha", _controllerSenha, TextInputType.text),
           ),
           Container(
             margin: EdgeInsets.only(top: 5),

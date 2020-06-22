@@ -89,7 +89,7 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                               Container(
                                 margin: EdgeInsets.only(top: 15),
                                 child: TextFieldPadrao(
-                                    "Cidade", _controllerCidade),
+                                    "Cidade", _controllerCidade, TextInputType.text),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),

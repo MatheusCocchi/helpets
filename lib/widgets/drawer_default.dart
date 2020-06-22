@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/adocao_widget.dart';
@@ -9,8 +12,40 @@ import 'package:helpets/view/login_widget.dart';
 import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/view/listaAdocao_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class DrawerDefault extends StatelessWidget {
+class DrawerDefault extends StatefulWidget {
+  @override
+  _State createState() => _State();
+}
+
+class _State extends State<DrawerDefault> {
+  var nomeUser = '';
+  String userJson = "";
+  Usuario usuario;
+
+  Future<String> getUserLogado() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String a = prefs.getString('userLogado');
+    return a;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getUserLogado().then((value) {
+      userJson = value;
+      Map userMap = json.decode(userJson.toString());
+
+      usuario = Usuario().toUser(userMap);
+      nomeUser = usuario.nome;
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -34,8 +69,8 @@ class DrawerDefault extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 10),
                     child: Text(
-                      'Bem-vindo(a), Matheus Cocchi',
-                      style: TextStyle(color: Colors.black, fontSize: 15),
+                      nomeUser,
+                      style: TextStyle(color: Colors.black, fontSize: 12),
                     ),
                   )
                 ],
@@ -84,7 +119,7 @@ class DrawerDefault extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
-          onTap: () {
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -101,7 +136,7 @@ class DrawerDefault extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
-          onTap: () {
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -118,7 +153,7 @@ class DrawerDefault extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
-          onTap: () {
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(

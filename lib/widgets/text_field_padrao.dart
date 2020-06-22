@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class TextFieldPadrao extends StatelessWidget {
   String hint;
   TextEditingController _controller;
+  TextInputType inputType;
 
-  TextFieldPadrao(this.hint, this._controller);
+  TextFieldPadrao(this.hint, this._controller, this.inputType);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class TextFieldPadrao extends StatelessWidget {
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]),
       child: TextField(
         decoration: InputDecoration(border: InputBorder.none, hintText: hint),
+        keyboardType: inputType,
         controller: _controller,
       ),
     );

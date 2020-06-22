@@ -159,15 +159,15 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     child: TextFieldPadrao(
-                        "Nome do doador", _controllerNomeDoador),
+                        "Nome do doador", _controllerNomeDoador, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Nome", _controllerNome),
+                    child: TextFieldPadrao("Nome", _controllerNome, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Raça", _controllerRaca),
+                    child: TextFieldPadrao("Raça", _controllerRaca, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
@@ -293,21 +293,21 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Idade", _controllerIdade),
+                    child: TextFieldPadrao("Idade", _controllerIdade, TextInputType.number),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Qualidade 1", _controllerQualidade),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao(
-                        "Qualidade 2", _controllerQualidadeDois),
+                    child: TextFieldPadrao("Qualidade 1", _controllerQualidade, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     child: TextFieldPadrao(
-                        "Qualidade 3", _controllerQualidadeTres),
+                        "Qualidade 2", _controllerQualidadeDois, TextInputType.text),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao(
+                        "Qualidade 3", _controllerQualidadeTres, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),

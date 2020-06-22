@@ -91,7 +91,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                               Container(
                                 margin: EdgeInsets.only(top: 15),
                                 child: TextFieldPadrao(
-                                    "Cidade", _controllerCidade),
+                                    "Cidade", _controllerCidade, TextInputType.text),
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
@@ -182,7 +182,7 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                child: TextFieldPadrao("Raça", _controllerRaca),
+                                child: TextFieldPadrao("Raça", _controllerRaca, TextInputType.text),
                               ),
                             ],
                           ),
