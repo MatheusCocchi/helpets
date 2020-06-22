@@ -11,6 +11,10 @@ class ProcurarPasseadorWidget extends StatefulWidget {
 
 class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+  final nomePasseador = 'Cocchi -';
+  final tipo = ' Passeador';
+  final cidadeEstado = 'Piraju';
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -133,7 +137,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    "Cocchi -",
+                    nomePasseador,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -141,7 +145,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
                     ),
                   ),
                   Text(
-                    " Passeador",
+                    tipo,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -156,7 +160,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
               child: Container(
                 margin: EdgeInsets.only(left: 20, bottom: 10),
                 child: Text(
-                  "Piraju - SP",
+                  cidadeEstado,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
