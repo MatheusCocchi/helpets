@@ -2,20 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:helpets/model/usuario.dart';
-import 'package:helpets/utils/nav.dart';
-import 'package:helpets/utils/prefs.dart';
-import 'package:helpets/view/cadastroAnimal_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-class CadastroUserWidget extends StatefulWidget {
+import 'package:http/http.dart' as http;
+
+class EditarUserWidget extends StatefulWidget {
   @override
-  _CadastroUserWidgetState createState() => _CadastroUserWidgetState();
+  _EditarUserWidgetState createState() => _EditarUserWidgetState();
 }
 
-class _CadastroUserWidgetState extends State<CadastroUserWidget> {
+class _EditarUserWidgetState extends State<EditarUserWidget> {
   TextEditingController _controllerNome = new TextEditingController();
   TextEditingController _controllerEndereco = new TextEditingController();
   TextEditingController _controllerNumero = new TextEditingController();
@@ -71,22 +69,9 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
   }
 
   inserirUsuario() {
-    if (_controllerNome.text.toString().isEmpty ||
-        _controllerEndereco.text.toString().isEmpty ||
-        _controllerNumero.text.toString().isEmpty ||
-        _controllerBairro.text.toString().isEmpty ||
-        _controllerCep.text.toString().isEmpty ||
-        _controllerIdade.text.toString().isEmpty ||
-        _controllerCidade.text.toString().isEmpty ||
-        _controllerTelefone.text.toString().isEmpty ||
-        _controllerEmail.text.toString().isEmpty ||
-        _controllerSenha.text.toString().isEmpty ||
-        valueSexo == "Selecione o sexo" ||
-        valueTipo == "Selecione o tipo de usuário") {
+    if (_controllerEmail.text.toString().isEmpty ||
+        _controllerSenha.text.toString().isEmpty) {
       _showDialog("Cadastro de Usuário", "Preencha todos os campos!");
-    } else if (int.parse(_controllerIdade.text.toString()) < 16) {
-      _showDialog("Cadastro de Usuário",
-          "Apenas pessoas com 16 anos ou mais podem realizar o cadastro em Helpets!!");
     } else {
       DateTime now = DateTime.now();
       String formattedDate = DateFormat('yyyy-MM-dd').format(now);
@@ -123,19 +108,6 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
           Map mapValue = json.decode(jValue.toString());
           if (mapValue["success"]) {
             _showDialog("Cadastro de Usuário", "Usuário inserido com sucesso!");
-            _controllerNome.clear();
-            _controllerEndereco.clear();
-            _controllerNumero.clear();
-            _controllerBairro.clear();
-            _controllerCep.clear();
-            _controllerCidade.clear();
-            _controllerEmail.clear();
-            _controllerSenha.clear();
-            _controllerTelefone.clear();
-            _controllerIdade.clear();
-            valueSexo = 'Selecione o sexo';
-            valueTipo = 'Selecione o tipo de usuário';
-            pop(context);
           } else {
             _showDialog("Cadastro de Usuário",
                 "Erro ao tentar inserir o usuário, tente novamente.");
@@ -249,7 +221,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     padding:
-                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                         color: Colors.white,
@@ -309,7 +281,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     padding:
-                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                         color: Colors.white,
@@ -387,7 +359,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                     ),
                     child: PinkButton(
                       "Salvar",
-                      () {
+                          () {
                         inserirUsuario();
                       },
                     ),

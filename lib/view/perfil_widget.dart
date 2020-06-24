@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'cadastroUser_widget.dart';
 import 'login_widget.dart';
@@ -13,6 +17,48 @@ class PerfilWidget extends StatefulWidget {
 
 class _PerfilWidgetState extends State<PerfilWidget> {
   String valueTipo = 'Selecione o tipo de usuário';
+
+  var nomeUser = '';
+  var endereco = '';
+  var telefone = '';
+  var sexo = '';
+  var tipo = '';
+  var bairro = '';
+  var idade = '';
+  var dataCad = '';
+
+  String userJson = "";
+  Usuario usuario;
+
+  Future<String> getUserLogado() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String a = prefs.getString('userLogado');
+    //print("MATHEUS - " + a);
+    return a;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getUserLogado().then((value) {
+      userJson = value;
+      Map userMap = json.decode(userJson.toString());
+
+      usuario = Usuario().toUser(userMap);
+      nomeUser = usuario.nome;
+      sexo = usuario.sexo;
+      endereco = usuario.endereco + ", " + usuario.numero.toString();
+      bairro = usuario.bairro + ", " + usuario.cidade;
+      idade = usuario.idade.toString();
+      dataCad = usuario.datacad;
+      telefone = usuario.telefone;
+      tipo = usuario.tipo;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +112,9 @@ class _PerfilWidgetState extends State<PerfilWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset(
-                "assets/images/cocchi_lindo.png",
+                sexo.startsWith('M')
+                    ? "assets/images/user_default_m.jpg"
+                    : "assets/images/user_default_f.jpg",
                 fit: BoxFit.cover,
                 width: 100,
                 height: 100,
@@ -87,101 +135,224 @@ class _PerfilWidgetState extends State<PerfilWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Container(
+          margin: EdgeInsets.only(top: 10),
           child: Text(
-            "Perfil",
+            nomeUser,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 24,
-              color: Color(0xFF000000),
+              fontSize: 20,
+              color: Color(0xFFFF1471),
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Container(
           margin: EdgeInsets.only(top: 30),
-          child: Text(
-            "Endereço: Rua Matheus Cocchi",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              color: Color(0xFF000000),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Text(
-            "Cidade: Piraju",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              color: Color(0xFF000000),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Text(
-            "Telefone: (14) 99999-9999",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              color: Color(0xFF000000),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 50),
-          child: Text(
-            "Alterar tipo de usuário:",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: Color(0xFF000000),
-              fontWeight: FontWeight.bold,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Endereço:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  endereco,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Container(
           margin: EdgeInsets.only(top: 15),
-          padding: EdgeInsets.only(top: 4, left: 16, right: 16),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]),
-          child: DropdownButton<String>(
-            value: valueTipo,
-            icon: Icon(Icons.arrow_downward,
-            color: Colors.black54,),
-            iconSize: 24,
-            elevation: 16,
-            isExpanded: true,
-            underline: SizedBox(),
-            onChanged: (String newValue) {
-              setState(() {
-                valueTipo = newValue;
-              });
-            },
-            items: <String>[
-              'Selecione o tipo de usuário',
-              'Passeador',
-              'Cuidador',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value,
-                style: TextStyle(color: Colors.black54),),
-              );
-            }).toList(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Bairro:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  bairro,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Telefone:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  telefone,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Idade:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  idade + " anos",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Sexo:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  sexo,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Tipo de Usuário:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  tipo,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Data de cadastro:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5),
+                child: Text(
+                  dataCad,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Container(
           margin: EdgeInsets.only(top: 40),
           child: PinkButton(
-            "Salvar",
+            "Editar dados",
             () {
               push(context, LoginWidget());
             },

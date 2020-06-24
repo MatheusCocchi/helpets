@@ -167,23 +167,23 @@ class _State extends State<DrawerDefault> {
               );
             },
           ),
-          ListTile(
-            title: Text(
-              "Lista Adoção",
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ListaAdocaoWidget(),
-                ),
-              );
-            },
-          ),
+//          ListTile(
+//            title: Text(
+//              "Lista Adoção",
+//              style: TextStyle(
+//                  fontSize: 20,
+//                  color: Colors.black,
+//                  fontWeight: FontWeight.bold),
+//            ),
+//            onTap: () {
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                  builder: (context) => ListaAdocaoWidget(),
+//                ),
+//              );
+//            },
+//          ),
           ListTile(
             title: Text(
               "Sair",
