@@ -5,6 +5,7 @@ import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/cadastroAnimal_widget.dart';
+import 'package:helpets/widgets/obscure_tf_padrao.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:http/http.dart' as http;
@@ -70,6 +71,41 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
     );
   }
 
+  void _showDialogSuccess(String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(msg),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                _controllerNome.clear();
+                _controllerEndereco.clear();
+                _controllerNumero.clear();
+                _controllerBairro.clear();
+                _controllerCep.clear();
+                _controllerCidade.clear();
+                _controllerEmail.clear();
+                _controllerSenha.clear();
+                _controllerTelefone.clear();
+                _controllerIdade.clear();
+                valueSexo = 'Selecione o sexo';
+                valueTipo = 'Selecione o tipo de usuário';
+                setState(() {});
+                pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   inserirUsuario() {
     if (_controllerNome.text.toString().isEmpty ||
         _controllerEndereco.text.toString().isEmpty ||
@@ -88,8 +124,9 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
       _showDialog("Cadastro de Usuário",
           "Apenas pessoas com 16 anos ou mais podem realizar o cadastro em Helpets!!");
     } else {
-      DateTime now = DateTime.now();
-      String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+//      DateTime now = DateTime.now();
+//      String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+      String formattedDate = '2020-06-24';
 
       user.nome = _controllerNome.text.toString();
       user.email = _controllerEmail.text.toString();
@@ -112,7 +149,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
 
       print(userJson);
 
-      var url = 'http://192.168.5.10:3001/users/inUser?jUsuario=' + userJson;
+      var url = 'http://192.168.5.13:3001/users/inUser?jUsuario=' + userJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {
@@ -122,20 +159,8 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
           String jValue = value.body;
           Map mapValue = json.decode(jValue.toString());
           if (mapValue["success"]) {
-            _showDialog("Cadastro de Usuário", "Usuário inserido com sucesso!");
-            _controllerNome.clear();
-            _controllerEndereco.clear();
-            _controllerNumero.clear();
-            _controllerBairro.clear();
-            _controllerCep.clear();
-            _controllerCidade.clear();
-            _controllerEmail.clear();
-            _controllerSenha.clear();
-            _controllerTelefone.clear();
-            _controllerIdade.clear();
-            valueSexo = 'Selecione o sexo';
-            valueTipo = 'Selecione o tipo de usuário';
-            pop(context);
+            _showDialogSuccess(
+                "Cadastro de Usuário", "Usuário inserido com sucesso!");
           } else {
             _showDialog("Cadastro de Usuário",
                 "Erro ao tentar inserir o usuário, tente novamente.");
@@ -303,7 +328,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao(
+                    child: ObscureTextFieldPadrao(
                         "Senha", _controllerSenha, TextInputType.text),
                   ),
                   Container(
@@ -348,35 +373,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 15),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFF1471),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        FlatButton(
-                          child: Text(
-                            "Carregar foto",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                        Icon(
-                          Icons.photo_camera,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 100),
+                    margin: EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width / 1.2,
                     height: 50,
                     decoration: BoxDecoration(

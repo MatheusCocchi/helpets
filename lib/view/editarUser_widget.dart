@@ -2,11 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:helpets/model/usuario.dart';
+import 'package:helpets/utils/nav.dart';
+import 'package:helpets/utils/prefs.dart';
+import 'package:helpets/widgets/obscure_tf_padrao.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
-import 'package:intl/intl.dart';
-
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditarUserWidget extends StatefulWidget {
   @override
@@ -24,18 +28,49 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
   TextEditingController _controllerTelefone = new TextEditingController();
   TextEditingController _controllerEmail = new TextEditingController();
   TextEditingController _controllerSenha = new TextEditingController();
+  TextEditingController _controllerNovaSenha = new TextEditingController();
+  TextEditingController _controllerConfirmSenha = new TextEditingController();
 
   String valueSexo = 'Selecione o sexo';
   String valueTipo = 'Selecione o tipo de usuário';
 
   String userJson = "";
-  Usuario user = new Usuario();
+  Usuario user;
+
+  Future<String> getUserLogado() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String a = prefs.getString('userLogado');
+    //print("MATHEUS - " + a);
+    return a;
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     Intl.defaultLocale = 'pt_BR';
+
+    getUserLogado().then((value) {
+      userJson = value;
+      Map userMap = json.decode(userJson.toString());
+
+      user = Usuario().toUser(userMap);
+       print("AAAAAAA "+ user.codigo.toString());
+      _controllerNome.text = user.nome;
+      _controllerEndereco.text = user.endereco;
+      _controllerNumero.text = user.numero.toString();
+      _controllerBairro.text = user.bairro;
+      _controllerCep.text = user.cep;
+      _controllerCidade.text = user.cidade;
+      _controllerIdade.text = user.idade.toString();
+      _controllerTelefone.text = user.telefone;
+      _controllerEmail.text = user.email;
+      valueSexo = user.sexo;
+      valueTipo = user.tipo;
+      setState(() {});
+    });
   }
 
   ///método "principal" responsável por construir a tela de cadastro de usuário
@@ -68,17 +103,85 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
     );
   }
 
-  inserirUsuario() {
-    if (_controllerEmail.text.toString().isEmpty ||
-        _controllerSenha.text.toString().isEmpty) {
-      _showDialog("Cadastro de Usuário", "Preencha todos os campos!");
+  void _showDialogSuccess(String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(msg),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                _controllerNome.clear();
+                _controllerEndereco.clear();
+                _controllerNumero.clear();
+                _controllerBairro.clear();
+                _controllerCep.clear();
+                _controllerCidade.clear();
+                _controllerEmail.clear();
+                _controllerSenha.clear();
+                _controllerTelefone.clear();
+                _controllerIdade.clear();
+                _controllerNovaSenha.clear();
+                _controllerConfirmSenha.clear();
+                valueSexo = 'Selecione o sexo';
+                valueTipo = 'Selecione o tipo de usuário';
+                pop(context);
+                setState(() {});
+                pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  editarDados() {
+    if (_controllerNome.text.toString().isEmpty ||
+        _controllerEndereco.text.toString().isEmpty ||
+        _controllerNumero.text.toString().isEmpty ||
+        _controllerBairro.text.toString().isEmpty ||
+        _controllerCep.text.toString().isEmpty ||
+        _controllerIdade.text.toString().isEmpty ||
+        _controllerCidade.text.toString().isEmpty ||
+        _controllerTelefone.text.toString().isEmpty ||
+        _controllerEmail.text.toString().isEmpty ||
+        valueSexo == "Selecione o sexo" ||
+        valueTipo == "Selecione o tipo de usuário" ||
+        (_controllerNovaSenha.text.toString().isNotEmpty &&
+            _controllerConfirmSenha.text.toString().isEmpty)) {
+      _showDialog("Editar dados", "Preencha todos os campos!");
+    } else if (int.parse(_controllerIdade.text.toString()) < 16) {
+      _showDialog("Editar dados",
+          "Apenas pessoas com 16 anos ou mais podem realizar o cadastro em Helpets!!");
+    } else if (_controllerNovaSenha.text.toString().isNotEmpty &&
+        (_controllerSenha.text.toString() != user.senha)) {
+      _showDialog("Editar dados",
+          "Senha informada não corresponde com nossa base de dados!");
+    } else if (_controllerNovaSenha.text.toString().isNotEmpty &&
+        (_controllerNovaSenha.text.toString() !=
+            _controllerConfirmSenha.text.toString())) {
+      _showDialog("Editar dados", "Erro ao confirmar nova senha.");
     } else {
-      DateTime now = DateTime.now();
-      String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+//      DateTime now = DateTime.now();
+//      String formattedDate = DateFormat.yMMMd().format(now);
+
+      String formattedDate = '2020-06-24';
+
+      String senha = '';
+      if (_controllerNovaSenha.text.toString().isNotEmpty)
+        senha = _controllerNovaSenha.text.toString();
+      else
+        senha = user.senha;
 
       user.nome = _controllerNome.text.toString();
       user.email = _controllerEmail.text.toString();
-      user.senha = _controllerSenha.text.toString();
+      user.senha = senha;
       user.endereco = _controllerEndereco.text.toString();
       user.numero = int.parse(_controllerNumero.text.toString());
       user.cep = _controllerCep.text.toString();
@@ -97,26 +200,28 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
 
       print(userJson);
 
-      var url = 'http://192.168.5.10:3001/users/inUser?jUsuario=' + userJson;
+      var url = 'http://192.168.5.13:3001/users/upUser?jUsuario=' + userJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {
-          _showDialog("Cadastro de Usuário",
-              "Erro ao tentar inserir o usuário, tente novamente.");
+          _showDialog("Editar dados",
+              "Erro ao tentar editar os dados, tente novamente.");
         } else {
           String jValue = value.body;
           Map mapValue = json.decode(jValue.toString());
           if (mapValue["success"]) {
-            _showDialog("Cadastro de Usuário", "Usuário inserido com sucesso!");
+            _showDialogSuccess("Editar dados", "Dados editados com sucesso!");
+
+            Prefs().addUser(userJson);
           } else {
-            _showDialog("Cadastro de Usuário",
-                "Erro ao tentar inserir o usuário, tente novamente.");
+            _showDialog("Editar dados",
+                "Erro ao tentar editar os dados, tente novamente.");
           }
         }
       }).catchError((erro) {
         print(erro);
-        _showDialog("Cadastro de Usuário",
-            "Ocorreu um erro inesperado, tente novamente.");
+        _showDialog(
+            "Editar dados", "Erro ao tentar editar os dados, tente novamente.");
       });
     }
   }
@@ -174,7 +279,7 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
             Container(
               margin: EdgeInsets.only(top: 30),
               child: Text(
-                "Cadastro de Usuário",
+                "Editar dados",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
@@ -221,7 +326,7 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     padding:
-                    EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                         color: Colors.white,
@@ -275,13 +380,8 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao(
-                        "Senha", _controllerSenha, TextInputType.text),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 15),
                     padding:
-                    EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                         color: Colors.white,
@@ -320,35 +420,24 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 15),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFF1471),
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        FlatButton(
-                          child: Text(
-                            "Carregar foto",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                        Icon(
-                          Icons.photo_camera,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
+                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                      child: Divider()),
+                  Container(
+                    child: ObscureTextFieldPadrao("Digite sua sennha",
+                        _controllerSenha, TextInputType.text),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 100),
+                    margin: EdgeInsets.only(top: 15),
+                    child: ObscureTextFieldPadrao("Digite a nova sennha",
+                        _controllerNovaSenha, TextInputType.text),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: ObscureTextFieldPadrao("Confirme a nova sennha",
+                        _controllerConfirmSenha, TextInputType.text),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
                     width: MediaQuery.of(context).size.width / 1.2,
                     height: 50,
                     decoration: BoxDecoration(
@@ -359,8 +448,8 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
                     ),
                     child: PinkButton(
                       "Salvar",
-                          () {
-                        inserirUsuario();
+                      () {
+                        editarDados();
                       },
                     ),
                   ),

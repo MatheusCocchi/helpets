@@ -62,6 +62,8 @@ class _MainWidgetState extends State<MainWidget> {
     // TODO: implement initState
     super.initState();
 
+
+
     getUserLogado().then((value) {
       userJson = value;
       Map userMap = json.decode(userJson.toString());

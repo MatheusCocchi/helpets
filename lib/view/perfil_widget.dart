@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
+import 'package:helpets/view/editarUser_widget.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +17,7 @@ class PerfilWidget extends StatefulWidget {
 }
 
 class _PerfilWidgetState extends State<PerfilWidget> {
-  String valueTipo = 'Selecione o tipo de usuário';
+  //String valueTipo = 'Selecione o tipo de usuário';
 
   var nomeUser = '';
   var endereco = '';
@@ -326,7 +327,7 @@ class _PerfilWidgetState extends State<PerfilWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                "Data de cadastro:",
+                "Ultima atualização:",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15,
@@ -354,7 +355,7 @@ class _PerfilWidgetState extends State<PerfilWidget> {
           child: PinkButton(
             "Editar dados",
             () {
-              push(context, LoginWidget());
+              push(context, EditarUserWidget());
             },
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:helpets/utils/prefs.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/recuperarSenha_widget.dart';
+import 'package:helpets/widgets/obscure_tf_padrao.dart';
 import 'package:helpets/widgets/pink_button.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'dart:convert' as convert;
@@ -84,7 +85,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     } else {
       var email = _controllerEmail.text.toString();
       var senha = _controllerSenha.text.toString();
-      var url = 'http://192.168.0.101:3001/users/login?email=' +
+      var url = 'http://192.168.5.13:3001/users/login?email=' +
           email +
           '&senha=' +
           senha;
@@ -153,14 +154,14 @@ class _LoginWidgetState extends State<LoginWidget> {
             fit: BoxFit.contain,
           ),
           Container(
-            margin: EdgeInsets.only(top: 40),
+            margin: EdgeInsets.only(top: 10),
             child: TextFieldPadrao(
                 "E-mail", _controllerEmail, TextInputType.emailAddress),
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
             child:
-                TextFieldPadrao("Senha", _controllerSenha, TextInputType.text),
+                ObscureTextFieldPadrao("Senha", _controllerSenha, TextInputType.text),
           ),
           Container(
             margin: EdgeInsets.only(top: 5),
