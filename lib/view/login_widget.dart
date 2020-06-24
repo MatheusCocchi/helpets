@@ -84,7 +84,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     } else {
       var email = _controllerEmail.text.toString();
       var senha = _controllerSenha.text.toString();
-      var url = 'http://192.168.5.10:3001/users/login?email=' +
+      var url = 'http://192.168.0.101:3001/users/login?email=' +
           email +
           '&senha=' +
           senha;
@@ -147,25 +147,13 @@ class _LoginWidgetState extends State<LoginWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Image.asset(
-            "assets/images/ic_helpets_prov.png",
-            width: 100,
-            height: 100,
+            "assets/images/logoTransparente.png",
+            width: 180,
+            height: 180,
             fit: BoxFit.contain,
           ),
           Container(
-            margin: EdgeInsets.only(top: 30),
-            child: Text(
-              "Login",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                color: Color(0xFFFF1471),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 15),
+            margin: EdgeInsets.only(top: 40),
             child: TextFieldPadrao(
                 "E-mail", _controllerEmail, TextInputType.emailAddress),
           ),

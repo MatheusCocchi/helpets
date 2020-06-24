@@ -12,9 +12,11 @@ class ProcurarPasseadorWidget extends StatefulWidget {
 class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final nomePasseador = 'Cocchi -';
+  final nomePasseador = 'Claúdio Gomes -';
   final tipo = ' Passeador';
-  final cidadeEstado = 'Piraju';
+  final cidadeEstado = 'Ourinhos';
+  final photo = 'user_default_m';
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -72,11 +74,10 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
                       );
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Passeador",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
                     icon: new Icon(Icons.menu),
@@ -88,22 +89,6 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -126,7 +111,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.asset(
-                    "assets/images/cocchi_lindo.png",
+                    "assets/images/" + photo + ".jpg",
                     fit: BoxFit.cover,
                   ),
                 ),

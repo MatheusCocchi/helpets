@@ -12,6 +12,7 @@ import 'package:helpets/view/login_widget.dart';
 import 'package:helpets/view/main_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/view/listaAdocao_widget.dart';
+import 'package:helpets/view/perfil_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerDefault extends StatefulWidget {
@@ -94,6 +95,23 @@ class _State extends State<DrawerDefault> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => MainWidget(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text(
+              "Perfil",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PerfilWidget(),
                 ),
               );
             },

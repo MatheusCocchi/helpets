@@ -67,33 +67,21 @@ class _ListaAdocaoWidgetState extends State<ListaAdocaoWidget> {
                       _scaffoldKey.currentState.openDrawer();
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Lista de Adoções",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                IconButton(
+                    icon: new Icon(Icons.menu),
+                    color: Colors.transparent,
+                    onPressed: () {},
                   ),
                 ],
               ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }

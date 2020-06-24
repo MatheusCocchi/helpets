@@ -12,12 +12,13 @@ class AdotarWidget extends StatefulWidget {
 class _AdotarWidgetState extends State<AdotarWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final nomeAnimal = 'Mel - ';
-  final racaAnimal = ' Persa';
+  final nomeAnimal = 'Meg - ';
+  final racaAnimal = ' Indefinido';
   final idadeAnimal = '1 ano de idade';
   final qualidadeUm = 'Dócil';
   final qualidadeDois = 'Carinhosa';
   final qualidadeTres = 'Sapeca';
+  final fotoAnimal = ['list1_dog1', 'list1_dog2'];
 
   int _selectedIndex = 0;
 
@@ -77,11 +78,10 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                       );
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Adotar",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
                     icon: new Icon(Icons.menu),
@@ -93,24 +93,6 @@ class _AdotarWidgetState extends State<AdotarWidget> {
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-            backgroundColor: Colors.pinkAccent
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-            backgroundColor: Colors.pinkAccent
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -134,10 +116,10 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                   borderRadius: BorderRadius.circular(30),
                 child: PageView(
                   children: <Widget>[
-                    Image.asset("assets/images/melzinha.jpg",
+                    Image.asset("assets/images/" + fotoAnimal[0] + ".jpg",
                     fit: BoxFit.cover,
                     ),
-                    Image.asset("assets/images/melzinha_dois.jpg",
+                    Image.asset("assets/images/" + fotoAnimal[1] + ".jpg",
                     fit: BoxFit.cover,
                     ),
                   ],

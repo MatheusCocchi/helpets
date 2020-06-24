@@ -12,9 +12,10 @@ class ProcurarCuidadorWidget extends StatefulWidget {
 class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final nomeCuidador = 'Cocchi -';
+  final nomeCuidador = 'Carlos Martins -';
   final tipo = ' Cuidador';
-  final cidadeEstado = 'Piraju';
+  final cidadeEstado = 'Timburi';
+  final photo = 'user_default_m';
 
 
   int _selectedIndex = 0;
@@ -74,11 +75,10 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                       );
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Cuidador",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
                     icon: new Icon(Icons.menu),
@@ -90,22 +90,6 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -128,7 +112,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.asset(
-                    "assets/images/cocchi_lindo.png",
+                    "assets/images/" + photo + ".jpg",
                     fit: BoxFit.cover,
                   ),
                 ),

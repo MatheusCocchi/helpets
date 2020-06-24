@@ -38,11 +38,11 @@ class _PasseadoresWidgetState extends State<PasseadoresWidget> {
     });
   }
 
-  final nomePessoa = ['Viviane Silva', 'Maurício de Souza', 'Rogério Marinke'];
+  final nomePessoa = ['Viviane Silva', 'Maurício de Souza', 'Claúdio Gomes'];
   final idadePessoa = ['27 anos', '26 anos', '45 anos'];
   final cidadePessoa = ['Ourinhos-SP', 'Timburi-SP', 'Ourinhos-SP'];
   final sexoPessoa = ['Feminino', 'Masculino', 'Masculino'];
-  final fotoPessoa = ['p2_foto1', 'p2_foto2', 'p2_foto3'];
+  final fotoPessoa = ['user_default_f', 'user_default_m', 'user_default_m'];
 
   @override
   Widget build(BuildContext context) {

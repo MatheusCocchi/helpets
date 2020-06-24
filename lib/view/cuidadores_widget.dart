@@ -38,11 +38,11 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
     });
   }
 
-  final nomePessoa = ['Cristina Souza', 'Carlos Martins', 'João Carlos Tomaz'];
-  final idadePessoa = ['45 anos', '28 anos', '33 anos'];
-  final cidadePessoa = ['Ourinhos-SP', 'Timburi-SP', 'Piraju-SP'];
-  final sexoPessoa = ['Feminino', 'Masculino', 'Masculino'];
-  final fotoPessoa = ['p1_foto1', 'p1_foto2', 'p1_foto3'];
+  final nomePessoa = ['Cristina Souza', 'Carlos Martins'];
+  final idadePessoa = ['45 anos', '28 anos'];
+  final cidadePessoa = ['Ourinhos-SP', 'Timburi-SP'];
+  final sexoPessoa = ['Feminino', 'Masculino'];
+  final fotoPessoa = ['user_default_f', 'user_default_m'];
 
   @override
   Widget build(BuildContext context) {
