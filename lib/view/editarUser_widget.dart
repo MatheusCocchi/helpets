@@ -37,6 +37,11 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
   String userJson = "";
   Usuario user;
 
+  int codigoUser = 0;
+  int statusUser = 0;
+  String senhaUser = '';
+  String dataCadUser = '';
+
   Future<String> getUserLogado() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -57,7 +62,6 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
       Map userMap = json.decode(userJson.toString());
 
       user = Usuario().toUser(userMap);
-       print("AAAAAAA "+ user.codigo.toString());
       _controllerNome.text = user.nome;
       _controllerEndereco.text = user.endereco;
       _controllerNumero.text = user.numero.toString();
@@ -194,7 +198,7 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
       user.datacad = formattedDate;
       user.status = 1;
 
-      Map userMap = user.toMap();
+      Map userMap = user.toMapWithCod();
 
       userJson = json.encode(userMap);
 

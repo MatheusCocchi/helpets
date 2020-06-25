@@ -51,6 +51,26 @@ class Usuario {
     };
   }
 
+  Map<String, dynamic> toMapWithCod() {
+    return {
+      'codigo': codigo,
+      'nome': nome,
+      'senha': senha,
+      'email': email,
+      'endereco': endereco,
+      'numero': numero,
+      'cep': cep,
+      'bairro': bairro,
+      'cidade': cidade,
+      'telefone': telefone,
+      'sexo': sexo,
+      'idade': idade,
+      'tipo': tipo,
+      'datacad': datacad,
+      'status': status,
+    };
+  }
+
   Usuario toUser(Map<String, dynamic> mapUser) {
     Usuario u = new Usuario(
         codigo: mapUser["codigo"],

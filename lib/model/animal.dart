@@ -64,7 +64,32 @@ class Animal {
       'status': status,
       'datacad': datacad,
       'tipo': tipo,
-      'codusuario': codusuario.toMap(),
+      'codusuario': codusuario.toMapWithCod(),
+    };
+  }
+
+  Map<String, dynamic> toMapWithCod() {
+    return {
+      'codigo': codigo,
+      'nome': nome,
+      'especie': especie,
+      'porte': porte,
+      'raca': raca,
+      'sexo': sexo,
+      'qualidade1': qualidade1,
+      'qualidade2': qualidade2,
+      'qualidade3': qualidade3,
+      'observacao': observacao,
+      'idade': idade,
+      'foto1': foto1,
+      'foto2': foto2,
+      'foto3': foto3,
+      'latitude': latitude,
+      'longitude': longitude,
+      'status': status,
+      'datacad': datacad,
+      'tipo': tipo,
+      'codusuario': codusuario.toMapWithCod(),
     };
   }
 

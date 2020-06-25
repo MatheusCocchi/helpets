@@ -85,7 +85,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     } else {
       var email = _controllerEmail.text.toString();
       var senha = _controllerSenha.text.toString();
-      var url = 'http://192.168.0.101:3001/users/login?email=' +
+      var url = 'http://192.168.5.13:3001/users/login?email=' +
           email +
           '&senha=' +
           senha;
