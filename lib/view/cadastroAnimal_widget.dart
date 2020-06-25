@@ -88,9 +88,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       this._imageUm = pickedImage;
     });
 
-    imageUm= _imageUm.readAsBytesSync();
+    imageUm = _imageUm.readAsBytesSync();
     //imageUm = base64Encode(imageBytes);
-
   }
 
   Future getImageDoisFromGallery() async {
@@ -100,9 +99,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       this._imageDois = pickedImage;
     });
 
-    imageDois= _imageDois.readAsBytesSync();
-   // imageDois = base64Encode(imageBytes);
-
+    imageDois = _imageDois.readAsBytesSync();
+    // imageDois = base64Encode(imageBytes);
   }
 
   Future getImageTresFromGallery() async {
@@ -112,9 +110,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       this._imageTres = pickedImage;
     });
 
-    imageUm= _imageTres.readAsBytesSync();
+    imageUm = _imageTres.readAsBytesSync();
     //imageTres = base64Encode(imageBytes);
-
   }
 
   // Converte pra base64
@@ -234,7 +231,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       print(animalJson);
 
       var url =
-          'http://192.168.5.13:3001/animal/inAnimal?jAnimal=' + animalJson;
+          'http://192.168.0.101:3001/animal/inAnimal?jAnimal=' + animalJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {
@@ -540,13 +537,26 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Observações",
-                        _controllerObservacoes, TextInputType.text),
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ]),
+                        child: TextField( 
+                          decoration: InputDecoration(
+                          labelText: 'Observações',
+                          border: InputBorder.none,
+                          ),
+                        maxLines: 8,
+                        controller: _controllerObservacoes,),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
                     height: 50,
-                    width: MediaQuery.of(context).size.width / 1.2,
+                    width: MediaQuery.of(context).size.width / 10,
                     decoration: BoxDecoration(
                         color: Color(0xFFFF1471),
                         borderRadius: BorderRadius.all(Radius.circular(50))),
