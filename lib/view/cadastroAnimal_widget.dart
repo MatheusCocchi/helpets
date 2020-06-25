@@ -87,6 +87,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       //print(pickedImage);
       this._imageUm = pickedImage;
     });
+
+    imageUm= _imageUm.readAsBytesSync();
+    //imageUm = base64Encode(imageBytes);
+
   }
 
   Future getImageDoisFromGallery() async {
@@ -95,6 +99,10 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     setState(() {
       this._imageDois = pickedImage;
     });
+
+    imageDois= _imageDois.readAsBytesSync();
+   // imageDois = base64Encode(imageBytes);
+
   }
 
   Future getImageTresFromGallery() async {
@@ -103,14 +111,18 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     setState(() {
       this._imageTres = pickedImage;
     });
+
+    imageUm= _imageTres.readAsBytesSync();
+    //imageTres = base64Encode(imageBytes);
+
   }
 
   // Converte pra base64
   String base64Image;
   List<int> imageBytes;
-  var imageUm, imageDois, imageTres;
+  List<int> imageUm, imageDois, imageTres;
 
-  void convertImage() {
+  /*void convertImage() {
     imageBytes = _imageUm.readAsBytesSync();
     base64Image = base64Encode(imageBytes);
 
@@ -120,7 +132,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     imageBytes = _imageTres.readAsBytesSync();
     base64Image = base64Encode(imageBytes);
     print(base64Image);
-  }
+  }*/
 
   // Tentar exibir
   void decodeImage() {
