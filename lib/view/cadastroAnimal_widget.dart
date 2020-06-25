@@ -42,20 +42,12 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   File _imageDois;
   File _imageTres;
 
-  var nomeUser = '';
-  var endereco = '';
-  var telefone = '';
-  var sexo = '';
-  var tipo = '';
-  var bairro = '';
-  var idade = '';
-  var dataCad = '';
-
   String animalJson = "";
   Animal animal = new Animal();
 
   String userJson = "";
   Usuario usuario;
+
   Future<String> getUserLogado() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Return string
@@ -63,34 +55,27 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     return a;
   }
 
-
   Position _position;
   StreamSubscription<Position> _positionStream;
   String _latitude, _longitude;
 
-    @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Intl.defaultLocale = 'pt_BR';
 
-      getUserLogado().then((value) {
+    getUserLogado().then((value) {
       userJson = value;
       Map userMap = json.decode(userJson.toString());
 
       usuario = Usuario().toUser(userMap);
-      nomeUser = usuario.nome;
-      sexo = usuario.sexo;
-      endereco = usuario.endereco + ", " + usuario.numero.toString();
-      bairro = usuario.bairro + ", " + usuario.cidade;
-      idade = usuario.idade.toString();
-      dataCad = usuario.datacad;
-      telefone = usuario.telefone;
-      tipo = usuario.tipo;
+
+      animal.codusuario = usuario;
+
       setState(() {});
     });
   }
-
 
   // final picker = ImagePicker();
 
@@ -104,7 +89,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     });
   }
 
-    Future getImageDoisFromGallery() async {
+  Future getImageDoisFromGallery() async {
     var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
@@ -112,7 +97,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     });
   }
 
-      Future getImageTresFromGallery() async {
+  Future getImageTresFromGallery() async {
     var pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
@@ -124,6 +109,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
   String base64Image;
   List<int> imageBytes;
   var imageUm, imageDois, imageTres;
+
   void convertImage() {
     imageBytes = _imageUm.readAsBytesSync();
     base64Image = base64Encode(imageBytes);
@@ -136,8 +122,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     print(base64Image);
   }
 
-  // Tentar exibir 
-  void decodeImage(){
+  // Tentar exibir
+  void decodeImage() {
     imageUm = base64Decode(base64Image.toString());
     imageDois = base64Decode(base64Image.toString());
     imageTres = base64Decode(base64Image.toString());
@@ -149,15 +135,15 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
      print(decodedBytes);
    }*/
 
-
 // Pega a latitude e longitude e converte para string
-  _getLocalization(){
-    geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-    .then((Position position){
-    setState(() {
-      _position = position;
-    });
-    }).catchError((e){
+  _getLocalization() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _position = position;
+      });
+    }).catchError((e) {
       print(e);
     });
 
@@ -168,7 +154,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
     print(_longitude);
   }
 
-    void _showDialog(String title, String msg) {
+  void _showDialog(String title, String msg) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -203,18 +189,18 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
         valuePorte == "Selecione o porte" ||
         valueTipo == "Selecione o tipo de cadastro") {
       _showDialog("Cadastro de Animal", "Preencha todos os campos!");
-    }  else {
-     // DateTime now = DateTime.now();
-    //  String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    } else {
+      // DateTime now = DateTime.now();
+      //  String formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
-    String formattedDate = '2020-06-24';
+      String formattedDate = '2020-06-24';
 
       animal.nome = _controllerNome.text.toString();
       animal.raca = _controllerRaca.text.toString();
       animal.idade = int.parse(_controllerIdade.text.toString());
       animal.qualidade1 = _controllerQualidade.text.toString();
       animal.qualidade2 = _controllerQualidadeDois.text.toString();
-      animal.qualidade3= _controllerQualidadeTres.text.toString();
+      animal.qualidade3 = _controllerQualidadeTres.text.toString();
       animal.observacao = _controllerObservacoes.text.toString();
       animal.sexo = valueSexo;
       animal.tipo = valueTipo;
@@ -235,7 +221,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
 
       print(animalJson);
 
-      var url = 'http://192.168.0.101:3001/animal/inAnimal?jAnimal=' + animalJson;
+      var url =
+          'http://192.168.0.101:3001/animal/inAnimal?jAnimal=' + animalJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {
@@ -270,7 +257,6 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       });
     }
   }
-
 
   ///método "principal" responsável por construir a tela cadastro de animal
   @override
@@ -350,11 +336,13 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Nome", _controllerNome, TextInputType.text),
+                    child: TextFieldPadrao(
+                        "Nome", _controllerNome, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Raça", _controllerRaca, TextInputType.text),
+                    child: TextFieldPadrao(
+                        "Raça", _controllerRaca, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
@@ -520,26 +508,28 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Idade", _controllerIdade, TextInputType.number),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao("Qualidade 1", _controllerQualidade, TextInputType.text),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 15),
                     child: TextFieldPadrao(
-                        "Qualidade 2", _controllerQualidadeDois, TextInputType.text),
+                        "Idade", _controllerIdade, TextInputType.number),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao(
-                        "Qualidade 3", _controllerQualidadeTres, TextInputType.text),
+                    child: TextFieldPadrao("Qualidade 1", _controllerQualidade,
+                        TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
-                    child: TextFieldPadrao(
-                        "Observações", _controllerObservacoes, TextInputType.text),
+                    child: TextFieldPadrao("Qualidade 2",
+                        _controllerQualidadeDois, TextInputType.text),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Qualidade 3",
+                        _controllerQualidadeTres, TextInputType.text),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 15),
+                    child: TextFieldPadrao("Observações",
+                        _controllerObservacoes, TextInputType.text),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 15),
@@ -668,8 +658,8 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
                     child: PinkButton(
                       "Salvar",
                       () {
-                       // push(context, PerfilWidget());
-                       inserirAnimal();
+                        // push(context, PerfilWidget());
+                        inserirAnimal();
                       },
                     ),
                   ),
