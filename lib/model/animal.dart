@@ -64,7 +64,7 @@ class Animal {
       'status': status,
       'datacad': datacad,
       'tipo': tipo,
-      'codusuario': codusuario,
+      'codusuario': codusuario.toMap(),
     };
   }
 
