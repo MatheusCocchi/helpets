@@ -18,7 +18,7 @@ class Animal {
   String latitude;
   String longitude;
   int status;
-  DateTime datacad;
+  String datacad;
   String tipo;
   Usuario codusuario;
 
