@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/view/adotar_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 
 class MapWidget extends StatefulWidget {
@@ -92,16 +93,15 @@ class _MapWidgetState extends State<MapWidget> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PasseadoresWidget(),
+                          builder: (context) => AdotarWidget(),
                         ),
                       );
                     },
                     color: Colors.white,
-                    iconSize: 40,
                   ),
                   Text(
                     "Mapa",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
                     icon: new Icon(Icons.menu),
@@ -113,22 +113,6 @@ class _MapWidgetState extends State<MapWidget> {
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pinkAccent,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble),
-            title: Text('Chat'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }

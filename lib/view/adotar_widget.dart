@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/adocao_widget.dart';
+import 'package:helpets/view/map_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
@@ -84,9 +85,16 @@ class _AdotarWidgetState extends State<AdotarWidget> {
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
-                    icon: new Icon(Icons.menu),
-                    color: Colors.transparent,
-                    onPressed: () {},
+                    icon: new Icon(Icons.room),
+                    color: Colors.white,
+                    onPressed: () {
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MapWidget(),
+                          ),
+                       );
+                    },
                   ),
                 ],
               ),
