@@ -129,7 +129,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    usuario.nome,
+                    usuario.tipo+" ",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -137,7 +137,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                     ),
                   ),
                   Text(
-                    usuario.tipo,
+                    "+ "+usuario.nome,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -214,7 +214,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                     ),
                     onPressed: () {
                       FlutterOpenWhatsapp.sendSingleMessage("+"+usuario.telefone,
-                          "Olá"+usuario.nome);
+                          "Olá "+usuario.nome);
                     },
                     color: Colors.white,
                     iconSize: 40,
