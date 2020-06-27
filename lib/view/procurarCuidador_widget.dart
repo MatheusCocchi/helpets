@@ -8,24 +8,19 @@ import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 class ProcurarCuidadorWidget extends StatefulWidget {
   final Usuario usuario;
 
-    const ProcurarCuidadorWidget({Key key, this.usuario}): super(key: key);
+  const ProcurarCuidadorWidget({Key key, this.usuario}) : super(key: key);
 
   @override
-  _ProcurarCuidadorWidgetState createState() => _ProcurarCuidadorWidgetState(usuario: this.usuario);
+  _ProcurarCuidadorWidgetState createState() =>
+      _ProcurarCuidadorWidgetState(usuario: this.usuario);
 }
 
 class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-    Usuario usuario;
+  Usuario usuario;
 
   _ProcurarCuidadorWidgetState({this.usuario});
-
-  final nomeCuidador = 'Carlos Martins -';
-  final tipo = ' Cuidador';
-  final cidadeEstado = 'Timburi';
-  final photo = 'user_default_m';
-
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -121,7 +116,9 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.asset(
-                    "assets/images/" + photo + ".jpg",
+                    usuario.sexo.startsWith("M")
+                        ? "assets/images/user_default_m.jpg"
+                        : "assets/images/user_default_f.jpg",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -132,7 +129,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    nomeCuidador,
+                    usuario.nome,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -140,7 +137,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                     ),
                   ),
                   Text(
-                    tipo,
+                    usuario.tipo,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -155,7 +152,7 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
               child: Container(
                 margin: EdgeInsets.only(left: 20, bottom: 10),
                 child: Text(
-                  cidadeEstado,
+                  usuario.cidade,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -216,7 +213,8 @@ class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      FlutterOpenWhatsapp.sendSingleMessage("+5514998595670", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
+                      FlutterOpenWhatsapp.sendSingleMessage("+5514998595670",
+                          "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
                     },
                     color: Colors.white,
                     iconSize: 40,
