@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cadastroUser_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:helpets/view/procurarCuidador_widget.dart';
+import 'package:http/http.dart' as http;
 
 class CuidadoresWidget extends StatefulWidget {
   @override
@@ -38,11 +42,63 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
     });
   }
 
-  final nomePessoa = ['Cristina Souza', 'Carlos Martins'];
-  final idadePessoa = ['45 anos', '28 anos'];
-  final cidadePessoa = ['Ourinhos-SP', 'Timburi-SP'];
-  final sexoPessoa = ['Feminino', 'Masculino'];
-  final fotoPessoa = ['user_default_f', 'user_default_m'];
+  void _showDialog(String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(msg),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<List<Usuario>> getCuidadores() async {
+    var url = 'http://192.168.0.100:3001/users/cuidadores';
+
+    var response = await http.get(url);
+
+    String listJson = response.body;
+
+    List list = json.decode(listJson);
+
+    final lCuidadores = List<Usuario>();
+
+    for (Map map in list) {
+      Usuario u = Usuario().toUser(map);
+      lCuidadores.add(u);
+    }
+
+    print(lCuidadores.length);
+
+    return lCuidadores;
+
+//    http.get(url).then((value) {
+//      print(value.body);
+//      if (value.body == "") {
+//        _showDialog("Lista de cuidadores",
+//            "Erro ao tentar inserir o usuário, tente novamente.");
+//      } else {
+//        String jValue = value.body;
+//
+//      }
+//    }).catchError((erro) {
+//      print(erro);
+//      _showDialog("Lista de cuidadores",
+//          "Ocorreu um erro inesperado, tente novamente.");
+//    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,6 +225,29 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
   }
 
   _body(BuildContext context) {
+    Future<List<Usuario>> future = getCuidadores();
+
+    return FutureBuilder(
+      future: future,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          _showDialog("Lista de cuidadores",
+              "Erro ao tentar inserir o usuário, tente novamente.");
+        }
+
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        List<Usuario> listCuidadores = snapshot.data;
+
+        return _listCuidadores(listCuidadores);
+      },
+    );
+  }
+
+  _listCuidadores(List<Usuario> cuidadores) {
     return SafeArea(
       child: Container(
         child: Column(
@@ -177,7 +256,7 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
               child: Container(
                 child: ListView.builder(
                   padding: EdgeInsets.all(16),
-                  itemCount: nomePessoa.length,
+                  itemCount: cuidadores.length,
                   itemBuilder: (context, index) {
                     return Container(
                       padding: EdgeInsets.all(12),
@@ -195,7 +274,9 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(
-                                "assets/images/" + fotoPessoa[index] + ".jpg",
+                                cuidadores[index].sexo.startsWith("M")
+                                    ? "assets/images/user_default_m.jpg"
+                                    : "assets/images/user_default_f.jpg",
                                 fit: BoxFit.cover,
                                 width: 100,
                                 height: 100,
@@ -218,7 +299,7 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                                       ),
                                       Container(
                                           margin: EdgeInsets.only(left: 5),
-                                          child: Text(nomePessoa[index])),
+                                          child: Text(cuidadores[index].nome)),
                                     ],
                                   ),
                                   Container(
@@ -233,7 +314,9 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                                         ),
                                         Container(
                                             margin: EdgeInsets.only(left: 5),
-                                            child: Text(idadePessoa[index])),
+                                            child: Text(cuidadores[index]
+                                                .idade
+                                                .toString())),
                                       ],
                                     ),
                                   ),
@@ -249,7 +332,8 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                                         ),
                                         Container(
                                             margin: EdgeInsets.only(left: 5),
-                                            child: Text(cidadePessoa[index])),
+                                            child:
+                                                Text(cuidadores[index].cidade)),
                                       ],
                                     ),
                                   ),
@@ -265,7 +349,7 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(left: 5),
-                                          child: Text(sexoPessoa[index]),
+                                          child: Text(cuidadores[index].sexo),
                                         ),
                                       ],
                                     ),
