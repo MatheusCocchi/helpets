@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpets/utils/nav.dart';
+import 'package:helpets/view/animalPerdido_widget.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
@@ -247,7 +248,7 @@ class _PerdidosWidget extends State<PerdidosWidget> {
                   ),
                 ),
                 onPressed: () {
-                  push(context, CadastroAnimalWidget());
+                  push(context, AnimalPerdidoWidget());
                 },
               ),
             ),

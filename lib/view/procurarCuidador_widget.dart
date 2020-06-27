@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/view/cuidadores_widget.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
 class ProcurarCuidadorWidget extends StatefulWidget {
+  final Usuario usuario;
+
+    const ProcurarCuidadorWidget({Key key, this.usuario}): super(key: key);
+
   @override
-  _ProcurarCuidadorWidgetState createState() => _ProcurarCuidadorWidgetState();
+  _ProcurarCuidadorWidgetState createState() => _ProcurarCuidadorWidgetState(usuario: this.usuario);
 }
 
 class _ProcurarCuidadorWidgetState extends State<ProcurarCuidadorWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+    Usuario usuario;
+
+  _ProcurarCuidadorWidgetState({this.usuario});
 
   final nomeCuidador = 'Carlos Martins -';
   final tipo = ' Cuidador';
