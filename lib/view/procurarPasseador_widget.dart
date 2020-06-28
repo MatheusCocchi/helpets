@@ -21,10 +21,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
 
   _ProcurarPasseadorWidgetState({this.usuario});
 
-  final nomePasseador = 'Claúdio Gomes -';
-  final tipo = ' Passeador';
-  final cidadeEstado = 'Ourinhos';
-  final photo = 'user_default_m';
+
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -120,7 +117,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.asset(
-                    "assets/images/" + photo + ".jpg",
+                    usuario.sexo.startsWith("M") ? "assets/images/user_default_m.jpg" : "assets/images/user_default_f.jpg",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -131,7 +128,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    nomePasseador,
+                    usuario.tipo+" ",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -139,7 +136,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
                     ),
                   ),
                   Text(
-                    tipo,
+                    "+ "+usuario.nome,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -154,7 +151,7 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
               child: Container(
                 margin: EdgeInsets.only(left: 20, bottom: 10),
                 child: Text(
-                  cidadeEstado,
+                  usuario.cidade,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -215,7 +212,8 @@ class _ProcurarPasseadorWidgetState extends State<ProcurarPasseadorWidget> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      FlutterOpenWhatsapp.sendSingleMessage("+5514998595670", "HELPETS - Teste de envio de mensagem (Cocchi aqui).");
+                      FlutterOpenWhatsapp.sendSingleMessage("+"+usuario.telefone,
+                          "Olá "+usuario.nome);
                     },
                     color: Colors.white,
                     iconSize: 40,
