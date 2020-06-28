@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:helpets/model/animal.dart';
+import 'package:helpets/model/usuario.dart';
 import 'package:helpets/utils/nav.dart';
 import 'package:helpets/widgets/drawer_default.dart';
 import 'package:helpets/view/passeadores_widget.dart';
 import 'package:helpets/widgets/text_field_padrao.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:helpets/view/adotar_widget.dart';
+import 'package:http/http.dart' as http;
 
 import 'cadastroAnimal_widget.dart';
 
@@ -36,16 +41,39 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
     ),
   ];
 
-  final nomeAnimal = ['Meg', 'Tobi', 'Floquinho'];
-  final racaAnimal = ['Indefinido', 'Indefinido', 'Indefinido'];
-  final porteAnimal = ['Pequeno', 'Pequeno', 'Pequeno'];
-  final sexoAnimal = ['Femea', 'Macho', 'Macho'];
-  final fotoAnimal = ['list1_dog1', 'list1_dog2', 'list1_cat1'];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<List<Animal>> getAnimaisAdocao() async {
+    var url = 'http://192.168.0.102:3001/animal/adocao';
+
+    var response = await http.get(url);
+
+    String listJson = response.body;
+
+    print("MATHEUS:\N " + listJson);
+
+    List list = json.decode(listJson);
+
+    final lAdocao = List<Animal>();
+
+    for (Map map in list) {
+      Animal a = Animal().toAnimal(map);
+
+      // Map mapUsu = json.decode();
+      Usuario usu = Usuario().toUser(map["codusuario"]);
+
+      a.codusuario = usu;
+
+      lAdocao.add(a);
+    }
+
+    print(lAdocao.length);
+
+    return lAdocao;
   }
 
   @override
@@ -220,7 +248,64 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
     );
   }
 
+  void _showDialog(String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(msg),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   _body(BuildContext context) {
+    Future<List<Animal>> future = getAnimaisAdocao();
+
+    return FutureBuilder(
+      future: future,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          _showDialog("Lista de animais para adoção",
+              "Erro ao buscar lista de animais para adoção.");
+        }
+
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        List<Animal> listAnimaisAdocao = snapshot.data;
+
+        return _listAdocao(listAnimaisAdocao);
+      },
+    );
+  }
+
+  /*void convertImage() {
+    imageBytes = _imageUm.readAsBytesSync();
+    base64Image = base64Encode(imageBytes);
+
+    imageBytes = _imageDois.readAsBytesSync();
+    base64Image = base64Encode(imageBytes);
+
+    imageBytes = _imageTres.readAsBytesSync();
+    base64Image = base64Encode(imageBytes);
+    print(base64Image);
+  }*/
+
+  _listAdocao(List<Animal> animaisAdocao) {
     return SafeArea(
       child: Container(
         child: Column(
@@ -252,104 +337,122 @@ class _AdocaoWidgetState extends State<AdocaoWidget> {
               child: Container(
                 child: ListView.builder(
                   padding: EdgeInsets.all(16),
-                  itemCount: nomeAnimal.length,
+                  itemCount: animaisAdocao.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.all(12),
-                      margin: EdgeInsets.only(top: 5, bottom: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 10)
-                          ]),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                "assets/images/" + fotoAnimal[index] + ".jpg",
-                                fit: BoxFit.cover,
-                                width: 100,
-                                height: 100,
+//                    var foto = animaisAdocao[index].foto1;
+//                    var fotoB64 = base64Encode(foto);
+//
+//                    final decodedBytes = base64Decode(fotoB64);
+
+                    return InkWell(
+                      onTap: () {
+                        push(
+                            context,
+                            AdotarWidget(
+                              animal: animaisAdocao[index],
+                            ));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        margin: EdgeInsets.only(top: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: Colors.black12, blurRadius: 10)
+                            ]),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  "assets/images/dog_adotar.jpg",
+                                  fit: BoxFit.cover,
+                                  width: 100,
+                                  height: 100,
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              margin: EdgeInsets.only(left: 15),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        "Nome:",
-                                        style: TextStyle(
-                                            color: Color(0xFFFF1471),
-                                            fontSize: 15),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                margin: EdgeInsets.only(left: 15),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          "Nome:",
+                                          style: TextStyle(
+                                              color: Color(0xFFFF1471),
+                                              fontSize: 15),
+                                        ),
+                                        Container(
+                                            margin: EdgeInsets.only(left: 5),
+                                            child: Text(
+                                                animaisAdocao[index].nome)),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "Porte:",
+                                            style: TextStyle(
+                                                color: Color(0xFFFF1471),
+                                                fontSize: 15),
+                                          ),
+                                          Container(
+                                              margin: EdgeInsets.only(left: 5),
+                                              child: Text(
+                                                  animaisAdocao[index].porte)),
+                                        ],
                                       ),
-                                      Container(
-                                          margin: EdgeInsets.only(left: 5),
-                                          child: Text(nomeAnimal[index])),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Porte:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "Raça:",
+                                            style: TextStyle(
+                                                color: Color(0xFFFF1471),
+                                                fontSize: 15),
+                                          ),
+                                          Container(
+                                              margin: EdgeInsets.only(left: 5),
+                                              child: Text(
+                                                  animaisAdocao[index].raca)),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "Sexo:",
+                                            style: TextStyle(
+                                                color: Color(0xFFFF1471),
+                                                fontSize: 15),
+                                          ),
+                                          Container(
                                             margin: EdgeInsets.only(left: 5),
-                                            child: Text(porteAnimal[index])),
-                                      ],
+                                            child:
+                                                Text(animaisAdocao[index].sexo),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Raça:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
-                                            margin: EdgeInsets.only(left: 5),
-                                            child: Text(racaAnimal[index])),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Sexo:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 5),
-                                          child: Text(sexoAnimal[index]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },

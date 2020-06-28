@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'usuario.dart';
 
 class Animal {
@@ -94,6 +96,7 @@ class Animal {
   }
 
   Animal toAnimal(Map<String, dynamic> mapAnimal) {
+
     Animal a = new Animal(
         codigo: mapAnimal["codigo"],
         nome: mapAnimal["nome"],
@@ -106,15 +109,13 @@ class Animal {
         qualidade3: mapAnimal["qualidade3"],
         observacao: mapAnimal["observacao"],
         idade: mapAnimal["idade"],
-        foto1: mapAnimal["foto1"],
         foto2: mapAnimal["foto2"],
         foto3: mapAnimal["foto3"],
         latitude: mapAnimal["latitude"],
         longitude: mapAnimal["longitude"],
         status: mapAnimal["status"],
         datacad: mapAnimal["datacad"],
-        tipo: mapAnimal["tipo"],
-        codusuario: mapAnimal["codusuario"]);
+        tipo: mapAnimal["tipo"]);
     return a;
   }
 }

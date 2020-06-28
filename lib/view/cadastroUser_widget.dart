@@ -149,7 +149,7 @@ class _CadastroUserWidgetState extends State<CadastroUserWidget> {
 
       print(userJson);
 
-      var url = 'http://192.168.5.13:3001/users/inUser?jUsuario=' + userJson;
+      var url = 'http://192.168.0.102:3001/users/inUser?jUsuario=' + userJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {

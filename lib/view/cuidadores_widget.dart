@@ -65,7 +65,7 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
   }
 
   Future<List<Usuario>> getCuidadores() async {
-    var url = 'http://192.168.0.100:3001/users/cuidadores';
+    var url = 'http://192.168.0.102:3001/users/cuidadores';
 
     var response = await http.get(url);
 
@@ -232,7 +232,7 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           _showDialog("Lista de cuidadores",
-              "Erro ao tentar inserir o usuário, tente novamente.");
+              "Erro ao buscar lista de cuidadores.");
         }
 
         if (!snapshot.hasData) {
@@ -258,74 +258,49 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                   padding: EdgeInsets.all(16),
                   itemCount: cuidadores.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.all(12),
-                      margin: EdgeInsets.only(top: 5, bottom: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 10)
-                          ]),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                cuidadores[index].sexo.startsWith("M")
-                                    ? "assets/images/user_default_m.jpg"
-                                    : "assets/images/user_default_f.jpg",
-                                fit: BoxFit.cover,
-                                width: 100,
-                                height: 100,
+                    return InkWell(
+                      onTap: () {
+                        push(
+                            context,
+                            ProcurarCuidadorWidget(
+                              usuario: cuidadores[index],
+                            ));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        margin: EdgeInsets.only(top: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: Colors.black12, blurRadius: 10)
+                            ]),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  cuidadores[index].sexo.startsWith("M")
+                                      ? "assets/images/user_default_m.jpg"
+                                      : "assets/images/user_default_f.jpg",
+                                  fit: BoxFit.cover,
+                                  width: 100,
+                                  height: 100,
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              margin: EdgeInsets.only(left: 15),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        "Nome:",
-                                        style: TextStyle(
-                                            color: Color(0xFFFF1471),
-                                            fontSize: 15),
-                                      ),
-                                      Container(
-                                          margin: EdgeInsets.only(left: 5),
-                                          child: Text(cuidadores[index].nome)),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                margin: EdgeInsets.only(left: 15),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
                                       children: <Widget>[
                                         Text(
-                                          "Idade:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
-                                            margin: EdgeInsets.only(left: 5),
-                                            child: Text(cuidadores[index]
-                                                .idade
-                                                .toString())),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Cidade:",
+                                          "Nome:",
                                           style: TextStyle(
                                               color: Color(0xFFFF1471),
                                               fontSize: 15),
@@ -333,32 +308,67 @@ class _CuidadoresWidgetState extends State<CuidadoresWidget> {
                                         Container(
                                             margin: EdgeInsets.only(left: 5),
                                             child:
-                                                Text(cuidadores[index].cidade)),
+                                                Text(cuidadores[index].nome)),
                                       ],
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          "Sexo:",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF1471),
-                                              fontSize: 15),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 5),
-                                          child: Text(cuidadores[index].sexo),
-                                        ),
-                                      ],
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "Idade:",
+                                            style: TextStyle(
+                                                color: Color(0xFFFF1471),
+                                                fontSize: 15),
+                                          ),
+                                          Container(
+                                              margin: EdgeInsets.only(left: 5),
+                                              child: Text(cuidadores[index]
+                                                  .idade
+                                                  .toString())),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "Cidade:",
+                                            style: TextStyle(
+                                                color: Color(0xFFFF1471),
+                                                fontSize: 15),
+                                          ),
+                                          Container(
+                                              margin: EdgeInsets.only(left: 5),
+                                              child: Text(
+                                                  cuidadores[index].cidade)),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "Sexo:",
+                                            style: TextStyle(
+                                                color: Color(0xFFFF1471),
+                                                fontSize: 15),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 5),
+                                            child: Text(cuidadores[index].sexo),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },

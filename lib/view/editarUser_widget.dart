@@ -204,7 +204,7 @@ class _EditarUserWidgetState extends State<EditarUserWidget> {
 
       print(userJson);
 
-      var url = 'http://192.168.5.13:3001/users/upUser?jUsuario=' + userJson;
+      var url = 'http://192.168.0.100:3001/users/upUser?jUsuario=' + userJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {

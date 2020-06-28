@@ -231,7 +231,7 @@ class _CadastroAnimalWidgetState extends State<CadastroAnimalWidget> {
       print(animalJson);
 
       var url =
-          'http://192.168.0.101:3001/animal/inAnimal?jAnimal=' + animalJson;
+          'http://192.168.0.102:3001/animal/inAnimal?jAnimal=' + animalJson;
       http.get(url).then((value) {
         print(value.body);
         if (value.body == "") {
